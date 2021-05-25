@@ -493,7 +493,9 @@ demo = {
         var myChart = new Chart(ctxDoughnut, {
             type: 'doughnut',
             data: data,
-            options: gradientDoughnut
+            options: gradientDoughnut,
+            responsive: true,
+
 
         });
 
