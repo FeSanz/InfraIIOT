@@ -166,17 +166,19 @@
                           //location.reload();
                           //$("#gauges").load(location.href+" #gauges");
                           //alert("Has precionado el botón")
-                          /*var ajax = $.ajax({
+                          var ajax = $.ajax({
                             data: {},
                             url: "https://huellascheck.000webhostapp.com/api/Api.php?apicall=getUsers",
                             type: 'POST',
                             success: function(response){
-                              //alert(response)
+                              var data = JSON.parse(response)
+                              console.log(response)
+                              console.log(data.users[0])
                             },
                             error: function(response, status, error){
                               alert("No encontrado")
                             }
-                          })*/
+                          })
                         })
                       })
                     </script>
