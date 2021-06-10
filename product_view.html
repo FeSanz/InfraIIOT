@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
@@ -107,16 +109,17 @@
                     <img src="assets/img/anime3.png" alt="Profile Photo">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Cerrar Sesión
-                  </p>
+                  <p class='d-lg-none' id="userName"></p>
+                  <script>
+                    document.getElementById("userName").innerText = localStorage.getItem("User");
+                  </script>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Perfil</a></li>
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Configuración</a>
                   </li>
                   <li class="dropdown-divider"></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Cerrar Sesión</a>
+                  <li class="nav-link"><a href="#" class="nav-item dropdown-item" id="logout">Cerrar Sesión</a>
                   </li>
                 </ul>
               </li>
@@ -147,16 +150,47 @@
                 <div class="row">
                   <div class="col-sm-6 text-left">
                     <h2 class="card-title">Estado actual</h2>
+                    <button id="btnReload">Reload</button>
+                    <script>
+                      var fill1 = 80;
+                      var void1 = 20;
+                      $(function () {
+                        var btnReload = $('#btnReload');
+                        btnReload.on('click', function (e) {
+                          fill1++;
+                          void1++;
+                          console.log("nums " + fill1 + " " + void1);
+                          //$('#gauges').re
+                          //alert(location+" "+fill1+" "+void1);
+                          //$('#gauges').remove();
+                          //$('#chartdiv').load(location.href + " #chartdiv");
+                          //location.reload();
+                          //$("#gauges").load(location.href+" #gauges");
+                          //alert("Has precionado el botón")
+                          /*var ajax = $.ajax({
+                            data: {},
+                            url: "https://huellascheck.000webhostapp.com/api/Api.php?apicall=getUsers",
+                            type: 'POST',
+                            success: function (response) {
+                              var data = JSON.parse(response)
+                              console.log(response)
+                              console.log(data.users[0])
+                            },
+                            error: function (response, status, error) {
+                              alert("No encontrado")
+                            }
+                          })*/
+                        })
+                      })
+                    </script>
                   </div>
                 </div>
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <div class="row">
-                    <div class="col-lg-4">
+                  <div class="row" id="gauges">
+                    <div id="gauge1" class="col-lg-4">
                       <h3 class="card-title">Temperatura</h3>
-                      <script src="https://www.amcharts.com/lib/4/core.js"></script>
-                      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
                       <div id="chartdiv"></div>
                       <!--canvas id="myChart1" width="250"></canvas-->
                     </div>
@@ -219,168 +253,7 @@
                 </div>
               </div>
             </div>
-            <!--div class="row">
-          <div class="col-lg-6 col-md-12">
-              <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category text-right">Registro de incidencias</h5>
-                <h3 class="card-title"><i class="tim-icons icon-sound-wave text-success"></i> 90%</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="chartDoughnut"></canvas>
-                </div>
-              </div>
           </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="card ">
-              <div class="card-header">
-                <h4 class="card-title"> Historial de incidencias</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " >
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Causa de la incidencia
-                        </th>
-                        <th>
-                          Fecha/Hora
-                        </th>
-                        <th class="text-center">
-                          Accion
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                         12
-                        </td>
-                        <td>
-                          Paro de emergencia
-                        </td>
-                        <td>
-                          12/02/2021 13:45:00
-                        </td>
-                        <td class="td-actions text-center">
-                         <button type="button" title="" class="btn btn-link" data-original-title="Info">
-                            <i class="tim-icons icon-tap-02"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      
-                      <tr>
-                        <td>
-                         13
-                        </td>
-                        <td>
-                         Sensor de temperatura no colocado
-                        </td>
-                        <td>
-                          12/02/2021 13:45:00
-                        </td>
-                        <td class="td-actions text-center">
-                         <button type="button" title="" class="btn btn-link" data-original-title="Info">
-                            <i class="tim-icons icon-tap-02"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      
-                      
-                      <tr>
-                        <td>
-                         14
-                        </td>
-                        <td>
-                         Tiempo máximo de llenado
-                        </td>
-                        <td>
-                          12/02/2021 13:45:00
-                        </td>
-                        <td class="td-actions text-center">
-                         <button type="button" title="" class="btn btn-link" data-original-title="Info">
-                            <i class="tim-icons icon-tap-02"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      
-                      
-                     <tr>
-                        <td>
-                         15
-                        </td>
-                        <td>
-                          Tempratura máxima permitida
-                        </td>
-                        <td>
-                          12/02/2021 13:45:00
-                        </td>
-                        <td class="td-actions text-center">
-                         <button type="button" title="" class="btn btn-link" data-original-title="Info">
-                            <i class="tim-icons icon-tap-02"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      
-                      <tr>
-                        <td>
-                         16
-                        </td>
-                        <td>
-                          Presion máxima permitida
-                        </td>
-                        <td>
-                          12/02/2021 13:45:00
-                        </td>
-                        <td class="td-actions text-center">
-                         <button type="button" title="" class="btn btn-link" data-original-title="Info">
-                            <i class="tim-icons icon-tap-02"></i>
-                          </button>
-                        </td>
-                      </tr>
-               
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div-->
-          </div>
-          <!--footer class="footer">
-            <div class="container-fluid">
-              <ul class="nav">
-                <li class="nav-item">
-                  <a href="javascript:void(0)" class="nav-link">
-                    Creative Tim
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="javascript:void(0)" class="nav-link">
-                    About Us
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="javascript:void(0)" class="nav-link">
-                    Blog
-                  </a>
-                </li>
-              </ul>
-              <div class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>2018 made with <i class="tim-icons icon-heart-2"></i> by
-                <a href="javascript:void(0)" target="_blank">Creative Tim</a> for a better web.
-              </div>
-            </div>
-          </footer-->
         </div>
       </div>
       <div class="fixed-plugin">
@@ -415,9 +288,12 @@
       <script src="assets/js/core/popper.min.js"></script>
       <script src="assets/js/core/bootstrap.min.js"></script>
       <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+      <script src="https://www.amcharts.com/lib/4/core.js"></script>
+      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
       <!--  Google Maps Plugin    -->
       <!-- Place this tag in your head or just before your close body tag. -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+      <!--script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script-->
       <!-- Chart JS -->
       <script src="assets/js/plugins/chartjs.min.js"></script>
       <!--  Notifications Plugin    -->
@@ -426,6 +302,8 @@
       <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
       <!-- Black Dashboard DEMO methods, don't include it in your project! -->
       <script src="assets/demo/demo.js"></script>
+      <script src="assets/js/storage.js"></script>
+      <!--script src="assets/js/index_log.js"></script-->
       <script>
         $(document).ready(function () {
           $().ready(function () {
@@ -543,31 +421,95 @@
           demo.initDashboardPageCharts();
 
         });
+        $(document).ready(function () {
+          //setInterval(demo.getDataDashboard, 1000);
+          //demo.getDataDashboard();
+        });
       </script>
       <script>
-        var chart = am4core.create("chartdiv", am4charts.PieChart);
+        var chart1 = am4core.create("chartdiv", am4charts.PieChart);
 
-        // Add data
-        chart.data = [{
+        chart1.data = [{
           "country": "Llenado",
-          "value": 50
+          "value": fill1
         }, {
           "country": "Vacio",
-          "value": 50
-        
+          "value": void1
+
         }];
+        $(function () {
+
+          var intId = setInterval(function () {
+            chart1.data = [{
+              "country": "Llenado",
+              "value": fill1
+            }, {
+              "country": "Vacio",
+              "value": void1
+
+            }];
+          }, 1000);
+
+        });
 
         // Add and configure Series
-        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        var pieSeries = chart1.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = "country";
         pieSeries.labels.template.disabled = true;
         pieSeries.ticks.template.disabled = true;
 
-        chart.legend = new am4charts.Legend();
-        chart.legend.position = "right";
+        /*chart1.legend = new am4charts.Legend();
+        chart1.legend.position = "right";*/
 
-        chart.innerRadius = am4core.percent(60);
+        chart1.innerRadius = am4core.percent(50);
+
+        var label = pieSeries.createChild(am4core.Label);
+        label.text = "{values.value.sum}%";
+        label.horizontalCenter = "middle";
+        label.verticalCenter = "middle";
+        label.fontSize = 25;
+
+
+      </script>
+      <script>
+        var chart2 = am4core.create("chartdiv2", am4charts.PieChart);
+
+        // Add data
+        chart2.data = [{
+          "country": "Llenado",
+          "value": 50
+        }, {
+          "country": "Vacio",
+          "value": 50
+
+        }];
+        $(function () {
+
+          var intId = setInterval(function () {
+            chart2.data = [{
+              "country": "Llenado",
+              "value": fill1
+            }, {
+              "country": "Vacio",
+              "value": void1
+
+            }];
+          }, 1000);
+
+        });
+
+        // Add and configure Series
+        var pieSeries = chart2.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "value";
+        pieSeries.dataFields.category = "country";
+        pieSeries.labels.template.disabled = true;
+        pieSeries.ticks.template.disabled = true;
+
+        /*chart2.legend = new am4charts.Legend();
+        chart2.legend.position = "right";*/
+
+        chart2.innerRadius = am4core.percent(60);
 
         var label = pieSeries.createChild(am4core.Label);
         label.text = "{values.value.sum}%";
@@ -576,29 +518,43 @@
         label.fontSize = 25;
       </script>
       <script>
-        var chart = am4core.create("chartdiv2", am4charts.PieChart);
+        var chart3 = am4core.create("chartdiv3", am4charts.PieChart);
 
         // Add data
-        chart.data = [{
+        chart3.data = [{
           "country": "Llenado",
           "value": 50
         }, {
           "country": "Vacio",
           "value": 50
-        
+
         }];
+        $(function () {
+
+          var intId = setInterval(function () {
+            chart3.data = [{
+              "country": "Llenado",
+              "value": fill1
+            }, {
+              "country": "Vacio",
+              "value": void1
+
+            }];
+          }, 1000);
+
+        });
 
         // Add and configure Series
-        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        var pieSeries = chart3.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = "country";
         pieSeries.labels.template.disabled = true;
         pieSeries.ticks.template.disabled = true;
 
-        chart.legend = new am4charts.Legend();
-        chart.legend.position = "right";
+        /*chart3.legend = new am4charts.Legend();
+        chart3.legend.position = "right";*/
 
-        chart.innerRadius = am4core.percent(60);
+        chart3.innerRadius = am4core.percent(60);
 
         var label = pieSeries.createChild(am4core.Label);
         label.text = "{values.value.sum}%";
@@ -606,36 +562,31 @@
         label.verticalCenter = "middle";
         label.fontSize = 25;
       </script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+
       <script>
-        var chart = am4core.create("chartdiv3", am4charts.PieChart);
-
-        // Add data
-        chart.data = [{
-          "country": "Llenado",
-          "value": 50
-        }, {
-          "country": "Vacio",
-          "value": 50
-        
-        }];
-
-        // Add and configure Series
-        var pieSeries = chart.series.push(new am4charts.PieSeries());
-        pieSeries.dataFields.value = "value";
-        pieSeries.dataFields.category = "country";
-        pieSeries.labels.template.disabled = true;
-        pieSeries.ticks.template.disabled = true;
-
-        chart.legend = new am4charts.Legend();
-        chart.legend.position = "right";
-
-        chart.innerRadius = am4core.percent(60);
-
-        var label = pieSeries.createChild(am4core.Label);
-        label.text = "{values.value.sum}%";
-        label.horizontalCenter = "middle";
-        label.verticalCenter = "middle";
-        label.fontSize = 25;
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyDSaJQjVoC68qsMv36zikiyXST4_dyXGPA",
+          authDomain: "i-iot-b1e3d.firebaseapp.com",
+          projectId: "i-iot-b1e3d",
+          storageBucket: "i-iot-b1e3d.appspot.com",
+          messagingSenderId: "914861533746",
+          appId: "1:914861533746:web:3db15ad941478bcb8b6a2b",
+          measurementId: "G-W8VD8H258M"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const auth = firebase.auth();
+        const fs = firebase.firestore();
       </script>
 </body>
 
