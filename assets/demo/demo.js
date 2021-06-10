@@ -1,8 +1,8 @@
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
 demo = {
-    initPickColor: function() {
-        $('.pick-class-label').click(function() {
+    initPickColor: function () {
+        $('.pick-class-label').click(function () {
             var new_class = $(this).attr('new-class');
             var old_class = $('#display-buttons').attr('data-class');
             var display_div = $('#display-buttons');
@@ -15,7 +15,7 @@ demo = {
         });
     },
 
-    initDocChart: function() {
+    initDocChart: function () {
         chartColor = "#FFFFFF";
 
         // General configuration for the charts with Line gradientStroke
@@ -106,7 +106,7 @@ demo = {
         });
     },
 
-    initDashboardPageCharts: function() {
+    initDashboardPageCharts: function () {
 
         gradientChartOptionsConfigurationWithTooltipBlue = {
             maintainAspectRatio: false,
@@ -300,6 +300,19 @@ demo = {
             }
         };
 
+        gradientDoughnut = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Doughnut Chart'
+                }
+            }
+        };
+
 
         gradientBarChartConfiguration = {
             maintainAspectRatio: false,
@@ -349,6 +362,7 @@ demo = {
             }
         };
 
+        /**************Temperatura Chart***************/
         var ctx = document.getElementById("chartLinePurple").getContext("2d");
 
         var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -374,7 +388,7 @@ demo = {
                 pointHoverRadius: 4,
                 pointHoverBorderWidth: 15,
                 pointRadius: 4,
-                data: [80, 100, 70, 80, 120, 80],
+                data: [50, 100, 70, 80, 120, 80],
             }]
         };
 
@@ -384,7 +398,48 @@ demo = {
             options: gradientChartOptionsConfigurationWithTooltipPurple
         });
 
+        /**************Fin Temperatura Chart***************/
 
+        /**************Presion Chart***************/
+        var ctxGreen = document.getElementById("chartLineBlue").getContext("2d");
+
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
+        gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
+        gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+
+        var data = {
+            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
+            datasets: [{
+                label: "My First dataset",
+                fill: true,
+                backgroundColor: gradientStroke,
+                borderColor: '#0ea5c4',
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: '#0ea5c4',
+                pointBorderColor: 'rgba(255,255,255,0)',
+                pointHoverBackgroundColor: '#0ea5c4',
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: [10, 97, 70, 50, 12],
+            }]
+        };
+
+        var myChart = new Chart(ctxGreen, {
+            type: 'line',
+            data: data,
+            options: gradientChartOptionsConfigurationWithTooltipBlue
+
+        });
+        /**************Fin Presion Chart***************/
+
+
+        /**************Porcentaje Chart***************/
         var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
 
         var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -420,7 +475,31 @@ demo = {
             options: gradientChartOptionsConfigurationWithTooltipGreen
 
         });
+        /**************Fin Porcentaje Chart***************/
 
+
+        /************************Doughnut Chart****************/
+        var ctxDoughnut = document.getElementById("chartDoughnut").getContext("2d");
+
+        var data = {
+            labels: ['INC.', 'INC.2', 'INC.3', 'INC.4', 'INC.5'],
+            datasets: [{
+                label: "Incidencias",
+                backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', "#a3c7c9"],
+                data: [10, 20, 30, 15, 25]
+            }]
+        };
+
+        var myChart = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: data,
+            options: gradientDoughnut,
+            responsive: true,
+
+
+        });
+
+        /****************Final Doughnut Chart****************************/
 
 
         var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -459,13 +538,13 @@ demo = {
             options: gradientChartOptionsConfigurationWithTooltipPurple
         };
         var myChartData = new Chart(ctx, config);
-        $("#0").click(function() {
+        $("#0").click(function () {
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
             data.labels = chart_labels;
             myChartData.update();
         });
-        $("#1").click(function() {
+        $("#1").click(function () {
             var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
@@ -473,7 +552,7 @@ demo = {
             myChartData.update();
         });
 
-        $("#2").click(function() {
+        $("#2").click(function () {
             var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
@@ -516,7 +595,7 @@ demo = {
 
     },
 
-    initGoogleMaps: function() {
+    initGoogleMaps: function () {
         var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
         var mapOptions = {
             zoom: 13,
@@ -722,7 +801,7 @@ demo = {
         marker.setMap(map);
     },
 
-    showNotification: function(from, align) {
+    showNotification: function (from, align) {
         color = Math.floor((Math.random() * 4) + 1);
 
         $.notify({
