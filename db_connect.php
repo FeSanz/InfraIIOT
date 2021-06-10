@@ -8,7 +8,7 @@ class DatabaseConnect
 
     function connect() 
     {
-        include_once dirname(__FILE__) . '/dbconstants.php';
+        include_once dirname(__FILE__) . '/db_constants.php';
         $this->con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         if (mysqli_connect_errno()) 
