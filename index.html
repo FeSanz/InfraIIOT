@@ -27,7 +27,7 @@
 
       <div class="content">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-9">
             <div class="card">
               <div class="card-header">
                 <h2 class="title">Iniciar Sesión</h2>
@@ -51,13 +51,13 @@
                     </div>
                   </div>
                 </div>
-
-                <form>
+                <form id="signin-form">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" class="form-control" placeholder="Usuario o correo electrónico" value="">
+                        <input type="text" class="form-control" placeholder="Usuario o correo electrónico" value=""
+                          id="email" required>
                       </div>
                     </div>
                   </div>
@@ -66,22 +66,23 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="text" class="form-control" placeholder="Contraseña" value="">
+                        <input type="password" class="form-control" placeholder="Contraseña" value="" id="password"
+                          required>
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                       <div class="form-group">
-                        <label>Olvidaste tu contraseña</label>
-                        </div>
+                        <a href="#" id="forgotPass"><u>Olvidaste tu contraseña</u></a>
+                      </div>
                     </div>
                   </div>
+                  <div class="card-footer">
+                    <button type="submit" href="#" class="btn btn-fill btn-primary">Acceder</button>
+                  </div>
                 </form>
-              </div>
-              <div class="card-footer">
-                <button type="button" class="btn btn-fill btn-primary" onclick="ChangePage()">Acceder</button>
               </div>
             </div>
           </div>
@@ -108,18 +109,19 @@
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Place this tag in your head or just before your close body tag. >
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script-->
   <!-- Chart JS -->
   <script src="assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
+  <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
   <script src="assets/demo/demo.js"></script>
   <script>
-    $(document).ready(function() {
-      $().ready(function() {
+    $(document).ready(function () {
+      $().ready(function () {
         $sidebar = $('.sidebar');
         $navbar = $('.navbar');
         $main_panel = $('.main-panel');
@@ -136,7 +138,7 @@
 
 
 
-        $('.fixed-plugin a').click(function(event) {
+        $('.fixed-plugin a').click(function (event) {
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
               event.stopPropagation();
@@ -146,7 +148,7 @@
           }
         });
 
-        $('.fixed-plugin .background-color span').click(function() {
+        $('.fixed-plugin .background-color span').click(function () {
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
 
@@ -169,7 +171,7 @@
           }
         });
 
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
           var $btn = $(this);
 
           if (sidebar_mini_active == true) {
@@ -183,23 +185,23 @@
           }
 
           // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function() {
+          var simulateWindowResize = setInterval(function () {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
           // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function() {
+          setTimeout(function () {
             clearInterval(simulateWindowResize);
           }, 1000);
         });
 
-        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
           var $btn = $(this);
 
           if (white_color == true) {
 
             $('body').addClass('change-background');
-            setTimeout(function() {
+            setTimeout(function () {
               $('body').removeClass('change-background');
               $('body').removeClass('white-content');
             }, 900);
@@ -207,7 +209,7 @@
           } else {
 
             $('body').addClass('change-background');
-            setTimeout(function() {
+            setTimeout(function () {
               $('body').removeClass('change-background');
               $('body').addClass('white-content');
             }, 900);
@@ -218,11 +220,11 @@
 
         });
 
-        $('.light-badge').click(function() {
+        $('.light-badge').click(function () {
           $('body').addClass('white-content');
         });
 
-        $('.dark-badge').click(function() {
+        $('.dark-badge').click(function () {
           $('body').removeClass('white-content');
         });
       });
@@ -235,6 +237,33 @@
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "black-dashboard-free"
       });
+  </script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyDSaJQjVoC68qsMv36zikiyXST4_dyXGPA",
+      authDomain: "i-iot-b1e3d.firebaseapp.com",
+      projectId: "i-iot-b1e3d",
+      storageBucket: "i-iot-b1e3d.appspot.com",
+      messagingSenderId: "914861533746",
+      appId: "1:914861533746:web:3db15ad941478bcb8b6a2b",
+      measurementId: "G-W8VD8H258M"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const auth = firebase.auth();
+    const fs = firebase.firestore();
   </script>
 </body>
 
