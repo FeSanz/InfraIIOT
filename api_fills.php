@@ -28,12 +28,11 @@ if (isset($_GET['api_fills']))
     switch ($_GET['api_fills']) 
     {
         case 'get_fill_interval':
-            $db = new DbOperation();
+            $db = new OperationsFills();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
-            $response['humedadates'] = $db->getFillInterval($_GET['startDate'], $_GET['endDate']);
-            break;
-
+            $response['fillsInterval'] = $db->getFillInterval($_GET['startDate'], $_GET['endDate']);
+        break;
     }
 } 
 else 

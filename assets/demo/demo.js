@@ -361,122 +361,170 @@ demo = {
                 }]
             }
         };
+        
+        
+        var today = new Date();
 
-        /**************Temperatura Chart***************/
-        var ctx = document.getElementById("chartLinePurple").getContext("2d");
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        today =  yyyy + '-' + mm + '-' + dd;
+        
+        jQuery.ajax({
+        type: "GET",
+        url: 'api_fills.php',
+        dataType: 'json',
+        data: {api_fills: 'get_fill_interval', startDate: '2019-03-15', endDate: today},
+        success: function (obj)
+        {            
+            if (!obj.error && !jQuery.isEmptyObject(obj.fillsInterval))
+            {
+                var datesFills = [];
+                var temperatureFills = [];
+                var presionFills = [];
+                var percentageFills = [];
+                
+                var i;
+                for (i in obj.fillsInterval)
+                {
+                    datesFills.push(obj.fillsInterval[i].fecha);
+                    percentageFills.push(obj.fillsInterval[i].porcentaje);
+                    presionFills.push(obj.fillsInterval[i].presion);
+                    temperatureFills.push(obj.fillsInterval[i].temperatura);
+                }
+            /**************Temperatura Chart***************/
+                var ctx = document.getElementById("chartLinePurple").getContext("2d");
 
-        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-        gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
+                var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-        var data = {
-            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-            datasets: [{
-                label: "Data",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: '#d048b6',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#d048b6',
-                pointBorderColor: 'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#d048b6',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [50, 100, 70, 80, 120, 80],
-            }]
-        };
+                gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
+                gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+                gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: gradientChartOptionsConfigurationWithTooltipPurple
-        });
+                var data = {
+                    labels: datesFills,
+                    datasets: [{
+                        label: "Data",
+                        fill: true,
+                        backgroundColor: gradientStroke,
+                        borderColor: '#d048b6',
+                        borderWidth: 2,
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        pointBackgroundColor: '#d048b6',
+                        pointBorderColor: 'rgba(255,255,255,0)',
+                        pointHoverBackgroundColor: '#d048b6',
+                        pointBorderWidth: 20,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 15,
+                        pointRadius: 4,
+                        data: temperatureFills,
+                    }]
+                };
 
-        /**************Fin Temperatura Chart***************/
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: gradientChartOptionsConfigurationWithTooltipPurple
+                });
 
-        /**************Presion Chart***************/
-        var ctxGreen = document.getElementById("chartLineBlue").getContext("2d");
+                /**************Fin Temperatura Chart***************/
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+                /**************Presion Chart***************/
+                var ctxGreen = document.getElementById("chartLineBlue").getContext("2d");
 
-        gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
-        gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
-        gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+                var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-        var data = {
-            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
-            datasets: [{
-                label: "My First dataset",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: '#0ea5c4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#0ea5c4',
-                pointBorderColor: 'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#0ea5c4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [10, 97, 70, 50, 12],
-            }]
-        };
+                gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
+                gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
+                gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
 
-        var myChart = new Chart(ctxGreen, {
-            type: 'line',
-            data: data,
-            options: gradientChartOptionsConfigurationWithTooltipBlue
+                var data = {
+                    labels: datesFills,
+                    datasets: [{
+                        label: "My First dataset",
+                        fill: true,
+                        backgroundColor: gradientStroke,
+                        borderColor: '#0ea5c4',
+                        borderWidth: 2,
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        pointBackgroundColor: '#0ea5c4',
+                        pointBorderColor: 'rgba(255,255,255,0)',
+                        pointHoverBackgroundColor: '#0ea5c4',
+                        pointBorderWidth: 20,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 15,
+                        pointRadius: 4,
+                        data: presionFills,
+                    }]
+                };
 
-        });
-        /**************Fin Presion Chart***************/
+                var myChart = new Chart(ctxGreen, {
+                    type: 'line',
+                    data: data,
+                    options: gradientChartOptionsConfigurationWithTooltipBlue
+
+                });
+                /**************Fin Presion Chart***************/
 
 
-        /**************Porcentaje Chart***************/
-        var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+                /**************Porcentaje Chart***************/
+                var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+                var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-        gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
-        gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
-        gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+                gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
+                gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
+                gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
 
-        var data = {
-            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
-            datasets: [{
-                label: "My First dataset",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: '#00d6b4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#00d6b4',
-                pointBorderColor: 'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#00d6b4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [90, 27, 60, 12, 80],
-            }]
-        };
+                var data = {
+                    labels: datesFills,
+                    datasets: [{
+                        label: "My First dataset",
+                        fill: true,
+                        backgroundColor: gradientStroke,
+                        borderColor: '#00d6b4',
+                        borderWidth: 2,
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        pointBackgroundColor: '#00d6b4',
+                        pointBorderColor: 'rgba(255,255,255,0)',
+                        pointHoverBackgroundColor: '#00d6b4',
+                        pointBorderWidth: 20,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 15,
+                        pointRadius: 4,
+                        data: percentageFills,
+                    }]
+                };
 
-        var myChart = new Chart(ctxGreen, {
-            type: 'line',
-            data: data,
-            options: gradientChartOptionsConfigurationWithTooltipGreen
+                var myChart = new Chart(ctxGreen, {
+                    type: 'line',
+                    data: data,
+                    options: gradientChartOptionsConfigurationWithTooltipGreen
 
-        });
-        /**************Fin Porcentaje Chart***************/
+                });
+                   /**************Fin Porcentaje Chart***************/
+            } 
+            else
+            {
+                if(jQuery.isEmptyObject(obj.humedadates))
+                {
+                    alertify.error('Seleccione otra fecha');
+                    
+                }
+                else
+                {
+                
+                }
+                
+            }
+        }
+    });
 
+       
 
         /************************Doughnut Chart****************/
         var ctxDoughnut = document.getElementById("chartDoughnut").getContext("2d");
@@ -595,211 +643,6 @@ demo = {
 
     },
 
-    initGoogleMaps: function () {
-        var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-        var mapOptions = {
-            zoom: 13,
-            center: myLatlng,
-            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-            styles: [{
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#1d2c4d"
-                }]
-            },
-                {
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#8ec3b9"
-                    }]
-                },
-                {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1a3646"
-                    }]
-                },
-                {
-                    "featureType": "administrative.country",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#4b6878"
-                    }]
-                },
-                {
-                    "featureType": "administrative.land_parcel",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#64779e"
-                    }]
-                },
-                {
-                    "featureType": "administrative.province",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#4b6878"
-                    }]
-                },
-                {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#334e87"
-                    }]
-                },
-                {
-                    "featureType": "landscape.natural",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#023e58"
-                    }]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#283d6a"
-                    }]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#6f9ba5"
-                    }]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#023e58"
-                    }]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#3C7680"
-                    }]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#304a7d"
-                    }]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#98a5be"
-                    }]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#2c6675"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#9d2a80"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#9d2a80"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#b0d5ce"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#023e58"
-                    }]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#98a5be"
-                    }]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "featureType": "transit.line",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#283d6a"
-                    }]
-                },
-                {
-                    "featureType": "transit.station",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#3a4762"
-                    }]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#0e1626"
-                    }]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#4e6d70"
-                    }]
-                }
-            ]
-        };
-
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            title: "Hello World!"
-        });
-
-        // To add the marker to the map, call setMap();
-        marker.setMap(map);
-    },
 
     showNotification: function (from, align) {
         color = Math.floor((Math.random() * 4) + 1);

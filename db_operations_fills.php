@@ -1,13 +1,13 @@
 <?php
  
-class FillsQuerys
+class OperationsFills
 {
     private $con;
  
     function __construct()
     {
         require_once dirname(__FILE__) . '/db_connect.php';
-        $db = new DbConnect();
+        $db = new DatabaseConnect();
         $this->con = $db->connect();
     }
  
@@ -38,9 +38,9 @@ class FillsQuerys
           $fill_array['porcentaje'] = $porcentaje;
           $fill_array['presion'] = $presion; 
           $fill_array['temperatura'] = $temperatura;
-          $fill_array['tipo'] = $cilindroTipo;
-          $fill_array['nombre'] = $equipoNombre;
-          $fill_array['nombre'] = $operadorNombre;
+          $fill_array['cilindroTipo'] = $cilindroTipo;
+          $fill_array['equipoNombre'] = $equipoNombre;
+          $fill_array['operadorNombre'] = $operadorNombre;
 
           array_push($fill_json, $fill_array); 
        }
