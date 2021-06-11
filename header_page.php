@@ -105,15 +105,16 @@
                                             <img src="assets/img/anime3.png" alt="Profile Photo">
                                         </div>
                                         <b class="caret d-none d-lg-block d-xl-block"></b>
-                                        <p class="d-lg-none">
-                                            Cerrar Sesión
-                                        </p>
+                                        <p class='d-lg-none' id="userName"></p>
+                                        <script>
+                                            document.getElementById("userName").innerText = localStorage.getItem("User");
+                                        </script>
                                     </a>
                                     <ul class="dropdown-menu dropdown-navbar">
                                         <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Perfil</a></li>
                                         <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Configuración</a></li>
                                         <li class="dropdown-divider"></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Cerrar Sesión</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" id="logout" class="nav-item dropdown-item">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                                 <li class="separator d-lg-none"></li>

@@ -1,4 +1,3 @@
-
 const logout = document.querySelector('#logout');
 
 logout.addEventListener('click', e => {
@@ -20,7 +19,7 @@ function initApp() {
             } else {
                 console.log("log out");
                 localStorage.setItem("User", "");
-                location.href = 'http://localhost/InfraIIOT-main';
+                location.href = 'index.html';
             }
         });
         //document.getElementById('forgotPass').addEventListener('click', sendPasswordReset, false);

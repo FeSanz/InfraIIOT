@@ -59,7 +59,7 @@ function initApp() {
     firebase.auth().onAuthStateChanged(
         function (user) {
             if (user) {
-                location.href = 'product_view.html';
+                location.href = 'product_view.php';
             } else {
                 console.log("log out");
             }
