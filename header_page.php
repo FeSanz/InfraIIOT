@@ -18,49 +18,45 @@
         <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="assets/demo/demo.css" rel="stylesheet" />
-
-        <!--css alertify-->
-        <link href="assets/alertify/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css"/>
-        <!--js alertify-->
-        <script src="assets/alertify/alertify.js" type="text/javascript"></script>
-        <script src="assets/alertify/alertify.min.js" type="text/javascript"></script>
     </head>
 
-    <body>
+    <body class="">
         <div class="wrapper">
-
+            
             <!-- Panel de navegación -->
             <div class="sidebar">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="javascript:void(0)" class="simple-text logo-mini"></a>
-                        <a href="javascript:void(0)" class="simple-text logo-normal">Menú</a>
+                        <a href="javascript:void(0)" class="simple-text logo-mini">
+
+                        </a>
+                        <a href="javascript:void(0)" class="simple-text logo-normal">
+                            Menú
+                        </a>
                     </div>
                     <ul class="nav">
                         <li class="active ">
-                            <a href="./dashboard.html">
+                            <a href="./product_view.html">
                                 <i class="tim-icons icon-chart-pie-36"></i>
-                                <p>Llenado</p>
+                                <p>Productividad</p>
                             </a>
                         </li>
                         <li>
-                            <a href="./icons.html">
+                            <a href="./incidents_view.html">
                                 <i class="tim-icons icon-alert-circle-exc"></i>
                                 <p>Incidencias</p>
                             </a>
                         </li>
                         <li>
-                            <a href="./map.html">
+                            <a href="#">
                                 <i class="tim-icons icon-tablet-2"></i>
-                                <p>Productividad</p>
+                                <p>Llenado</p>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
             <!-- Fin panel de navegación -->
-
 
             <div class="main-panel">
                 <!-- Navbar -->
@@ -76,8 +72,7 @@
                             </div>
                             <a class="navbar-brand" href="javascript:void(0)">Infra</a>
                         </div>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar navbar-kebab"></span>
                             <span class="navbar-toggler-bar navbar-kebab"></span>
                             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -85,8 +80,7 @@
                         <div class="collapse navbar-collapse" id="navigation">
                             <ul class="navbar-nav ml-auto">
                                 <li class="search-bar input-group">
-                                    <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i
-                                            class="tim-icons icon-zoom-split"></i>
+                                    <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split" ></i>
                                         <span class="d-lg-none d-md-block">Buscar</span>
                                     </button>
                                 </li>
@@ -112,18 +106,15 @@
                                             <img src="assets/img/anime3.png" alt="Profile Photo">
                                         </div>
                                         <b class="caret d-none d-lg-block d-xl-block"></b>
-                                        <p class='d-lg-none' id="userName"></p>
-                                        <script>
-                                            document.getElementById("userName").innerText = localStorage.getItem("User");
-                                        </script>
+                                        <p class="d-lg-none">
+                                            Cerrar Sesión
+                                        </p>
                                     </a>
                                     <ul class="dropdown-menu dropdown-navbar">
                                         <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Perfil</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Configuración</a>
-                                        </li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Configuración</a></li>
                                         <li class="dropdown-divider"></li>
-                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item" id="logout">Cerrar Sesión</a>
-                                        </li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                                 <li class="separator d-lg-none"></li>
@@ -134,8 +125,7 @@
                 <!-- Fin Navbar -->
                 
                 <!-- Search -->
-                <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
-                     aria-hidden="true">
+                <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
