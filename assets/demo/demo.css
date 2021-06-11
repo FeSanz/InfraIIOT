@@ -64,9 +64,9 @@
 
 .navbar-brand-centered {
   position: absolute;
-  left: 50%;
+  left: 45%;
   display: block;
-  width: 160px;
+  width: 240px;
   text-align: center;
 }
 .navbar>.container .navbar-brand-centered, 
@@ -77,4 +77,7 @@
   margin: 0 auto; /* Added */
   float: none; /* Added */
   margin-bottom: 10px; /* Added */
+}
+.mt-n1 {
+  margin-top: 6.5rem !important;
 }
