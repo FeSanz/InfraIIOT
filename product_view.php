@@ -12,25 +12,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class="row" id="gauges">
-                            <div id="gauge1" class="col-lg-4">
-                                <h3 class="card-title">Temperatura</h3>
-                                <div id="chartdiv"></div>
-                                <!--canvas id="myChart1" width="250"></canvas-->
-                            </div>
-                            <div class="col-lg-4">
-                                <h3 class="card-title">Presión</h3>
-                                <div id="chartdiv2"></div>
-                            </div>
-                            <div class="col-lg-4">
-                                <h3 class="card-title">Porcentaje</h3>
-                                <div id="chartdiv3"></div>
-                            </div>
-                        </div>
+
+                <div class="row" style="height: 16em;">
+                    <div class="col-lg-4">
+                         <h5 class="card-category"> Temperatura</h5>
+                         <div id="guageTemperature" class="gauge-container"></div>
                     </div>
                 </div>
+
             </div>
 
             <div class="row">
