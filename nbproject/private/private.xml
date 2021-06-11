@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/xampp/htdocs/InfraIIOT/db_operations_fills.php</file>
             <file>file:/C:/xampp/htdocs/InfraIIOT/api_fills.php</file>
+            <file>file:/C:/xampp/htdocs/InfraIIOT/incidents_view.html</file>
             <file>file:/C:/xampp/htdocs/InfraIIOT/db_constants.php</file>
+            <file>file:/C:/xampp/htdocs/InfraIIOT/product_view.html</file>
             <file>file:/C:/xampp/htdocs/InfraIIOT/db_connect.php</file>
             <file>file:/C:/xampp/htdocs/InfraIIOT/assets/demo/demo.js</file>
         </group>
