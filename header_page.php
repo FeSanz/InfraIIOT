@@ -17,6 +17,7 @@
         <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <!--  -->
         <link href="assets/demo/demo.css" rel="stylesheet" />
+        <link href="assets/guajes/guages_style.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body class="">
