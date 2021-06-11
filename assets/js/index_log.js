@@ -10,11 +10,12 @@ signinForm.addEventListener('submit', (e) => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
 
-        //.createUserWithEmailAndPassword(email, password)
+    //.createUserWithEmailAndPassword(email, password)
     auth
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             //clear form
+            document.getElementById("errorMessageSession").innerText = "";
             localStorage.setItem("User", email)
             signinForm.reset();
             //console.log('sign in OK')
@@ -22,9 +23,13 @@ signinForm.addEventListener('submit', (e) => {
         })
         .catch((error) => {
             var errorCode = error.code;
-            var errorMessage = error.message;
+            document.getElementById("errorMessageSession").innerText = "Usuario o contraseña incorrectos";
+            /*var errorMessage = error.message;
             console.log(errorMessage);
-            // ..
+            console.log(errorCode);
+            
+            if (errorCode == 'auth/user-not-found') {
+            }*/
         });
 })
 
@@ -32,17 +37,20 @@ function sendPasswordReset() {
     var email = document.getElementById('email').value;
     firebase.auth().sendPasswordResetEmail(email).then(function () {
         // Password Reset Email Sent!
-        alert('Password Reset Email Sent!');
+        //alert('Password Reset Email Sent!');
+        document.getElementById("errorMessageSession").innerText = "Se ha enviado un correo de recuperación";
     }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode == 'auth/invalid-email') {
-            alert(errorMessage);
+            //alert(errorMessage);
+            document.getElementById("errorMessageSession").innerText = "formato de correo inválido";
         } else if (errorCode == 'auth/user-not-found') {
-            alert(errorMessage);
+            //alert(errorMessage);
+            document.getElementById("errorMessageSession").innerText = "Correo electrónico no encontrado";
         }
-        console.log(error);
+        //console.log(error);
     });
 }
 
