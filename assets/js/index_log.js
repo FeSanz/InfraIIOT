@@ -45,7 +45,7 @@ function sendPasswordReset() {
         var errorMessage = error.message;
         if (errorCode == 'auth/invalid-email') {
             //alert(errorMessage);
-            document.getElementById("errorMessageSession").innerText = "formato de correo inválido";
+            document.getElementById("errorMessageSession").innerText = "Formato de correo inválido";
         } else if (errorCode == 'auth/user-not-found') {
             //alert(errorMessage);
             document.getElementById("errorMessageSession").innerText = "Correo electrónico no encontrado";
@@ -61,7 +61,7 @@ function initApp() {
             if (user) {
                 location.href = 'product_view.php';
             } else {
-                console.log("log out");
+                //console.log("log out");
             }
         });
     document.getElementById('forgotPass').addEventListener('click', sendPasswordReset, false);
