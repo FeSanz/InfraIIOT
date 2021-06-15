@@ -29,11 +29,20 @@ if (isset($_GET['api_fills']))
     #Dependiendo del valor de la clave se llamará una operación de BD
     switch ($_GET['api_fills']) 
     {
+        #Obtiene los parametros de llanado para dasboards
         case 'get_fill_interval':
             $db = new OperationsFills();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
             $response['fillsInterval'] = $db->getFillInterval($_GET['startDate'], $_GET['endDate']);
+        break;
+    
+         #Obtiene la temperatura, presion y llenado en tiempo real
+        case 'get_current_fill':
+            $db = new OperationsFills();
+            $response['error'] = false;
+            $response['message'] = 'Solicitud completada exitosamente';
+            $response['currentFill'] = $db->getCurrentFill();
         break;
         
         #Obtiene la lista de alarmas disparadas

@@ -15,9 +15,14 @@
         <!--  Icons -->
         <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
-        <!--  -->
+        <!-- Dashboards Style -->
         <link href="assets/demo/demo.css" rel="stylesheet" />
-        <link href="assets/guajes/guages_style.css" rel="stylesheet" type="text/css"/>
+         <!-- Alertify CSS-->
+        <link href="assets/alertify/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Alertify JS-->
+        <script src="assets/alertify/alertify.js" type="text/javascript"></script>
+        <script src="assets/alertify/alertify.min.js" type="text/javascript"></script>
     </head>
 
     <body class="">

@@ -1,20 +1,50 @@
-    jQuery.ajax({
-            type: "GET",
-            url: 'api_fills.php',
-            dataType: 'json',
-            data: {api_fills: 'get_fill_interval', startDate: '2019-03-15', endDate: today},
-            success: function (obj)
-            { 
-                /*********Gauge temperatura**************/
+   function getFillsGauges(){ 
+       
+                jQuery.ajax({
+                     type: "GET",
+                     url: 'api_fills.php',
+                     dataType: 'json',
+                     data: {api_fills: 'get_current_fill'},
+                     success: function (obj)
+                     { 
+                        if (!obj.error && !jQuery.isEmptyObject(obj.currentFill))
+                        {
+                            buildGauges(
+                                    obj.currentFill[0].temperatura,
+                                    obj.currentFill[0].presion,
+                                    obj.currentFill[0].porcentaje);
+                        } 
+                         else
+                        {
+                            if(jQuery.isEmptyObject(obj.currentFill))
+                            {
+                                alertify.error('No se encontraron datos');
+                            }
+                            else
+                            {
+                                alertify.success(obj.message);
+                            }
+                        }  
+                     }
+                 });  
+   }
+   
+   function buildGauges(temperature, pressure, percentage, success)
+   {
+       //54°C temperatura maxima 
+       //3200 PSI presion maxima
+       var tempVal = Math.round(((temperature * 100) / 54) * 10) / 10;
+       var presVal = Math.round(((pressure * 100) / 3200) * 10) / 10;
+        /*********Gauge temperatura**************/
                 var chart = am4core.create("gauge_temperature", am4charts.PieChart);
 
                 // Add data
                 chart.data = [{
-                        "country": "Llenado",
-                        "value": 50
+                        "country": "Temperatura",
+                        "value": tempVal
                     }, {
                         "country": "Vacio",
-                        "value": 50
+                        "value": 100- tempVal
 
                     }];
 
@@ -31,7 +61,7 @@
                 chart.innerRadius = am4core.percent(70);
 
                 var label = pieSeries.createChild(am4core.Label);
-                label.text = "10%";
+                label.text = temperature.toString() + " °C";
                 label.horizontalCenter = "middle";
                 label.verticalCenter = "middle";
                 label.fontSize = 20;
@@ -42,11 +72,11 @@
 
                 // Add data
                 chart.data = [{
-                        "country": "Llenado",
-                        "value": 50
+                        "country": "Presión",
+                        "value": presVal
                     }, {
                         "country": "Vacio",
-                        "value": 50
+                        "value": 100 - presVal
 
                     }];
 
@@ -63,7 +93,7 @@
                 chart.innerRadius = am4core.percent(70);
 
                 var label = pieSeries.createChild(am4core.Label);
-                label.text = "10%";
+                label.text = pressure.toString() + " PSI";;
                 label.horizontalCenter = "middle";
                 label.verticalCenter = "middle";
                 label.fontSize = 20;
@@ -74,11 +104,11 @@
 
                 // Add data
                 chart.data = [{
-                        "country": "Llenado",
-                        "value": 50
+                        "country": "Porcentaje",
+                        "value": percentage
                     }, {
                         "country": "Vacio",
-                        "value": 50
+                        "value": 100 - percentage
 
                     }];
 
@@ -95,12 +125,14 @@
                 chart.innerRadius = am4core.percent(70);
 
                 var label = pieSeries.createChild(am4core.Label);
-                label.text = "10%";
+                label.text = percentage.toString() + " %";
                 label.horizontalCenter = "middle";
                 label.verticalCenter = "middle";
                 label.fontSize = 20;
-            }
-        });
+   }
 
-
-
+setInterval(
+    function()
+    { 
+        getFillsGauges(); 
+    }, 5000);
