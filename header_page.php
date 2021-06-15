@@ -88,7 +88,7 @@
                                     <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                         <div class="notification d-none d-lg-block d-xl-block"></div>
                                         <i class="tim-icons icon-sound-wave"></i>
-                                        <div class="badge" id="numAlerts">0</div>
+                                        <div class="badge1" id="numAlerts">0</div>
                                         <p class="d-lg-none">
                                             Notificaciones
                                         </p>
