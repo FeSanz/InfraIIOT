@@ -51,6 +51,13 @@ if (isset($_GET['api_fills']))
             $response['message'] = 'Solicitud completada exitosamente';
             $response['alarmGroups'] = $db->getAlarmGroups($_GET['startDate'], $_GET['endDate']);
         break;
+    
+        case 'get_alarm_notification':
+            $db = new OperationsFills();
+            $response['error'] = false;
+            $response['message'] = 'Solicitud completada exitosamente';
+            $response['notification'] = $db->getDataNotifications();
+        break;
     }
 } 
 else 

@@ -111,4 +111,32 @@ class OperationsFills
 
        return $AlarmsJSON; 
     }
+    
+        function getDataNotifications()
+    {       
+       $sqlNotifications = $this->con->prepare("
+            SELECT alarmas.id, alarmas.fecha, equipos.nombre, alarma_tipo.nombre 
+            FROM alarmas, equipos, alarma_tipo 
+            WHERE alarmas.equipo = equipos.id 
+            AND alarmas.alarma_tipos = alarma_tipo.id 
+            AND alarmas.`status` = 1");
+       $sqlNotifications->execute();
+       $sqlNotifications->bind_result($id, $fecha, $nombreEquipo, $alarmaTipo);
+
+       $notifications_json = array(); 
+
+       while($sqlNotifications->fetch())
+       {
+          $notifications_array  = array();
+          $notifications_array['id'] = $id;  
+          $notifications_array['fecha'] = $fecha; 
+          $notifications_array['nombreEquipo'] = $nombreEquipo;
+          $notifications_array['alarmaTipo'] = $alarmaTipo; 
+
+
+          array_push($notifications_json, $notifications_array); 
+       }
+
+       return $notifications_json; 
+    }
 }

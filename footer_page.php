@@ -58,7 +58,11 @@
         <script src="assets/guajes/gauge.js" type="text/javascript"></script>
         <script src="assets/demo/demo.js"></script>
         <script src="assets/demo/background_behaviour.js" type="text/javascript"></script>
-        <script src="assets/guajes/gauge.js" type="text/javascript"></script>
+        
+        <!-- Gauge Charts -->
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="assets/gauges/guages_fill.js" type="text/javascript"></script>
    
         <script>
             $(document).ready(function () {

@@ -313,7 +313,6 @@ demo = {
             }
         };
 
-
         gradientBarChartConfiguration = {
             maintainAspectRatio: false,
             legend: {
@@ -405,7 +404,7 @@ demo = {
                     var data = {
                         labels: datesFills,
                         datasets: [{
-                            label: "Data",
+                            label: "*",
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderColor: '#d048b6',
@@ -443,7 +442,7 @@ demo = {
                     var data = {
                         labels: datesFills,
                         datasets: [{
-                            label: "My First dataset",
+                            label: "Info.",
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderColor: '#0ea5c4',
@@ -482,7 +481,7 @@ demo = {
                     var data = {
                         labels: datesFills,
                         datasets: [{
-                            label: "My First dataset",
+                            label: "Info.",
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderColor: '#00d6b4',
