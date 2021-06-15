@@ -93,28 +93,22 @@
                                     <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                         <div class="notification d-none d-lg-block d-xl-block"></div>
                                         <i class="tim-icons icon-sound-wave"></i>
+                                        <div class="badge" id="numAlerts">0</div>
                                         <p class="d-lg-none">
                                             Notificaciones
                                         </p>
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mensaje 1</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Mensaje 2</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Mensaje 3</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Mensaje 4</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Mensaje 5</a></li>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar" id="alertList">
+                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">No hay alertas</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown nav-item">
                                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                         <div class="photo">
-                                            <img src="assets/img/anime3.png" alt="Profile Photo">
+                                            <img src="assets/img/anime3.png" alt="Profile Photo" width="240px">
                                         </div>
                                         <b class="caret d-none d-lg-block d-xl-block"></b>
                                         <p class='d-lg-none' id="userName"></p>
-                                        <script>
-                                            document.getElementById("userName").innerText = localStorage.getItem("User");
-                                        </script>
                                     </a>
                                     <ul class="dropdown-menu dropdown-navbar">
                                         <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Perfil</a></li>

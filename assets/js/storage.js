@@ -7,22 +7,45 @@ logout.addEventListener('click', e => {
     })
 })
 
+function callAlarms() {
+    jQuery.ajax({
+        type: "GET",
+        url: 'api_fills.php',
+        dataType: 'json',
+        data: { api_fills: 'get_alarm_notification' },
+        success: function (data) {
+            var lista = document.getElementById("alertList");
+            document.getElementById("numAlerts").innerText = data.notification.length;
+            lista.innerHTML = "";
+            for (var n in data.notification) {
+                var mensaje = document.createElement("li");
+                mensaje.innerHTML = '<a href="javascript:void(0)" class="nav-item dropdown-item">' + data.notification[n].alarmaTipo + '</a>';
+                lista.appendChild(mensaje);
+            }
+        },
+        error: function (response, status, error) {
+            document.getElementById("alertList").innerHTML =
+                '<li class="nav-link"><a href="#" class="nav-item dropdown-item">No hay conexión</a></li>';
+            document.getElementById("numAlerts").innerText = 1;
+        }
+    });
+}
 
 function initApp() {
     // Listening for auth state changes.
+    
     firebase.auth().onAuthStateChanged(
         function (user) {
-            
-            if (user) {
-                console.log(localStorage.getItem("User"));
-                console.log("Sign in");
-            } else {
-                console.log("log out");
+            if (!user) {
                 localStorage.setItem("User", "");
                 location.href = 'index.html';
             }
         });
-        //document.getElementById('forgotPass').addEventListener('click', sendPasswordReset, false);
+
+        document.getElementById("userName").innerText = localStorage.getItem("User");
+    //setInterval(function(){
+    callAlarms();
+    //}, 1000);
 }
 
 window.onload = function () {
