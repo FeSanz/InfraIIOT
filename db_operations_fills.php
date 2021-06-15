@@ -47,6 +47,29 @@ class OperationsFills
 
        return $fill_json; 
     }
+    
+    function getCurrentFill()
+    {        
+       $sqlCurrentFill = $this->con->prepare("SELECT temperatura, presion, porcentaje 
+                                                FROM llenados 
+                                                WHERE id= (SELECT MAX(id) AS id FROM llenados)");
+       $sqlCurrentFill->execute();
+       $sqlCurrentFill->bind_result($temperature, $presion, $percentage);
+
+       $current_fill_json = array(); 
+
+       while($sqlCurrentFill->fetch())
+       {
+          $current_fill  = array();
+          $current_fill['temperatura'] = $temperature;  
+          $current_fill['presion'] = $presion; 
+          $current_fill['porcentaje'] = $percentage;
+
+          array_push($current_fill_json, $current_fill); 
+       }
+
+       return $current_fill_json; 
+    }
 
    function getAlarmList($startDate, $endDate)
    {
