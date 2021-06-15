@@ -14,14 +14,12 @@ function callAlarms() {
         dataType: 'json',
         data: { api_fills: 'get_alarm_notification' },
         success: function (data) {
-            console.log(data);
-            //var data = JSON.parse(response)
             var lista = document.getElementById("alertList");
-            document.getElementById("numAlerts").innerText = data.alarmList.length;
+            document.getElementById("numAlerts").innerText = data.notification.length;
             lista.innerHTML = "";
-            for (var n in data.alarmList) {
+            for (var n in data.notification) {
                 var mensaje = document.createElement("li");
-                mensaje.innerHTML = '<a href="javascript:void(0)" class="nav-item dropdown-item">' + data.alarmList[n].alarmasNombre + '</a>';
+                mensaje.innerHTML = '<a href="javascript:void(0)" class="nav-item dropdown-item">' + data.notification[n].alarmaTipo + '</a>';
                 lista.appendChild(mensaje);
             }
         },
