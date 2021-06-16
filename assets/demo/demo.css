@@ -97,7 +97,7 @@
   color: #EF476F;
 }
 
-.badge {
+.badge1 {
   position: absolute;
   top: -5px;
   left: 34px;
@@ -111,7 +111,7 @@
   white-space: nowrap;
 }
 
-.notifier.green .badge {
+.notifier.green .badge1 {
   background: #06D6A0;
 }
 
@@ -119,7 +119,7 @@
   color: #06D6A0;
 }
 
-.notifier.new .badge {
+.notifier.new .badge1 {
   animation: pulse 2s ease-out;
   animation-iteration-count: infinite;
 }

@@ -530,4 +530,185 @@ function ajaxIncidentOperation(startDay, endDay) {
             }
         }
     });
+<<<<<<< HEAD
 }
+=======
+
+    jQuery.ajax({
+        type: "GET",
+        url: 'api_fills.php',
+        dataType: 'json',
+        data: { api_fills: 'get_alarm_notification' },
+        success: function (data) {
+            var lista = document.getElementById("alertList");
+            //lista.className = "list-group";
+            console.log("first reload");
+            document.getElementById("numAlerts").innerText = data.notification.length;
+            lista.innerHTML = "";
+            for (var n in data.notification) {
+                var mensaje = document.createElement("li");
+                mensaje.className = "list-group-item d-flex justify-content-between align-items-center";
+                mensaje.innerHTML = '<a href="javascript:void(0)" class="nav-item dropdown-item">' + 
+                data.notification[n].alarmaTipo + '</a><span class="badge badge-success badge-pill">new</span>';
+                lista.appendChild(mensaje);
+            }
+        },
+        error: function (response, status, error) {
+            document.getElementById("alertList").innerHTML =
+                '<li class="nav-link"><a href="#" class="nav-item dropdown-item">No hay conexión</a></li>';
+            document.getElementById("numAlerts").innerText = 1;
+        }
+    });
+    setInterval(function(){
+
+        jQuery.ajax({
+            type: "GET",
+            url: 'api_fills.php',
+            dataType: 'json',
+            data: { api_fills: 'get_alarm_notification' },
+            success: function (data) {
+                var lista = document.getElementById("alertList");
+                //lista.className = "list-group";
+                console.log("reloaded");
+                document.getElementById("numAlerts").innerText = data.notification.length;
+                lista.innerHTML = "";
+                for (var n in data.notification) {
+                    var mensaje = document.createElement("li");
+                    mensaje.className = "list-group-item d-flex justify-content-between align-items-center";
+                    mensaje.innerHTML = '<a href="javascript:void(0)" class="nav-item dropdown-item">' + 
+                    data.notification[n].alarmaTipo + '</a><span class="badge badge-success badge-pill">new</span>';
+                    lista.appendChild(mensaje);
+                }
+            },
+            error: function (response, status, error) {
+                document.getElementById("alertList").innerHTML =
+                    '<li class="nav-link"><a href="#" class="nav-item dropdown-item">No hay conexión</a></li>';
+                document.getElementById("numAlerts").innerText = 1;
+            }
+        });
+        
+    },5000)
+        var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+        var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
+
+
+        var ctx = document.getElementById("chartBig1").getContext('2d');
+
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+        gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
+        var config = {
+            type: 'line',
+            data: {
+                labels: chart_labels,
+                datasets: [{
+                    label: "My First dataset",
+                    fill: true,
+                    backgroundColor: gradientStroke,
+                    borderColor: '#d346b1',
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    pointBackgroundColor: '#d346b1',
+                    pointBorderColor: 'rgba(255,255,255,0)',
+                    pointHoverBackgroundColor: '#d346b1',
+                    pointBorderWidth: 20,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 15,
+                    pointRadius: 4,
+                    data: chart_data,
+                }]
+            },
+            options: gradientChartOptionsConfigurationWithTooltipPurple
+        };
+        var myChartData = new Chart(ctx, config);
+        $("#0").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+        $("#1").click(function () {
+            var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#2").click(function () {
+            var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+
+        var ctx = document.getElementById("CountryChart").getContext("2d");
+
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
+        gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
+        gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
+
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            responsive: true,
+            legend: {
+                display: false
+            },
+            data: {
+                labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+                datasets: [{
+                    label: "Countries",
+                    fill: true,
+                    backgroundColor: gradientStroke,
+                    hoverBackgroundColor: gradientStroke,
+                    borderColor: '#1f8ef1',
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    data: [53, 20, 10, 80, 100, 45],
+                }]
+            },
+            options: gradientBarChartConfiguration
+        });
+
+    },
+
+
+    showNotification: function (from, align) {
+        color = Math.floor((Math.random() * 4) + 1);
+
+        $.notify({
+            icon: "tim-icons icon-bell-55",
+            message: "Welcome to <b>Black Dashboard</b> - a beautiful freebie for every web developer."
+
+        }, {
+            type: type[color],
+            timer: 8000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    }
+
+};
+
+  var gauge1 = Gauge(
+    document.getElementById("guageTemperature"),
+    {
+      max: 100,
+      dialStartAngle: -90,
+      dialEndAngle: -90.001,
+      value: 10,
+      label: "12"
+    }
+  );
+>>>>>>> 901ab24bbad02d1090e7bdaff0670afef299551b
