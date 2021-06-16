@@ -15,37 +15,37 @@
         </div>
 
         <!--Panel colores-->
-        <div class="fixed-plugin">
+         <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
-                <a href="#" data-toggle="dropdown">
-                    <i class="fa fa-cog fa-2x"> </i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header-title"> Menú color</li>
-                    <li class="adjustments-line">
-                        <a href="javascript:void(0)" class="switch-trigger background-color">
-                            <div class="badge-colors text-center">
-                                <span class="badge filter badge-primary active" data-color="primary"></span>
-                                <span class="badge filter badge-dark" data-color="blue"></span>
-                                <span class="badge filter badge-success" data-color="green"></span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </li>
-                    <li class="adjustments-line text-center color-change">
-                        <span class="color-label">LIGHT MODE</span>
-                        <span class="badge light-badge mr-2"></span>
-                        <span class="badge dark-badge ml-2"></span>
-                        <span class="color-label">DARK MODE</span>
-                    </li>
+              <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header-title"> Menú color</li>
+                <li class="adjustments-line">
+                  <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                      <span class="badge filter badge-primary active" data-color="primary"></span>
+                      <span class="badge filter badge-dark" data-color="blue"></span>
+                      <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </a>
+                </li>
+                <li class="adjustments-line text-center color-change">
+                  <span class="color-label">LIGHT MODE</span>
+                  <span class="badge light-badge mr-2"></span>
+                  <span class="badge dark-badge ml-2"></span>
+                  <span class="color-label">DARK MODE</span>
+                </li>
 
-                </ul>
+              </ul>
             </div>
         </div>
         <!--Fin panel colores-->
         
         <!--   Core JS Files   -->
-        <script src="assets/js/core/jquery.min.js"></script>
+<!--        <script src="assets/js/core/jquery.min.js"></script>-->
         <script src="assets/js/core/popper.min.js"></script>
         <script src="assets/js/core/bootstrap.min.js"></script>
         <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
