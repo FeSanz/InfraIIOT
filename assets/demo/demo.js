@@ -538,7 +538,7 @@ function ajaxIncidentOperation(startDay, endDay) {
         }
     });
 }
-
+/*
 function ViewAndShowNotification(alarma, id, fecha, equipo){
     //console.log("Alarma: "+Alarma+"\nID: "+id+"\nFecha: "+fecha+"\nEqiupo: "+nombreEquipo);
     document.getElementById('tituloAlerta').innerText = alarma;
@@ -590,7 +590,7 @@ function GetNotifications(){
              document.getElementById("numAlerts").innerText = 1;
          }
      });
-}
+}*/
 /*
         var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
         var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];

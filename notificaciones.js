@@ -1,12 +1,3 @@
-$(document).ready(function () {
-    console.log("ssss")
-    GetNotifications();
-    setInterval(function(){
-        GetNotifications();
-    },10000)
-    
-});
-
 function GetNotifications(){
     jQuery.ajax({
         type: "GET",
@@ -18,6 +9,11 @@ function GetNotifications(){
             //lista.className = "list-group";
             document.getElementById("numAlerts").innerText = data.notification.length;
             lista.innerHTML = "";
+            
+            if(!data.notification.length){
+                lista.innerHTML =
+                    '<li class="nav-link"><a href="#" class="nav-item dropdown-item">No hay notificaciones</a></li>';
+            }
             for (var n in data.notification) {
                 var mensaje = document.createElement("li");
                 mensaje.className = "list-group-item d-flex justify-content-between align-items-center";
@@ -53,6 +49,7 @@ function NotifiacationView(id, alarma, fecha, equipo){
         success: function (response)
         { 
             //console.log(response.status);
+            GetNotifications();
         }
     })
 
