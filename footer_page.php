@@ -88,8 +88,8 @@
         <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
         <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-        <script src="assets/demo/demo.js"></script>
         <script src="assets/js/storage.js"></script>
+        <script src="notificaciones.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
