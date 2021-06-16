@@ -530,11 +530,9 @@ function ajaxIncidentOperation(startDay, endDay) {
             }
         }
     });
-<<<<<<< HEAD
 }
-=======
 
-    jQuery.ajax({
+   /* jQuery.ajax({
         type: "GET",
         url: 'api_fills.php',
         dataType: 'json',
@@ -710,5 +708,4 @@ function ajaxIncidentOperation(startDay, endDay) {
       value: 10,
       label: "12"
     }
-  );
->>>>>>> 901ab24bbad02d1090e7bdaff0670afef299551b
+  );*/
