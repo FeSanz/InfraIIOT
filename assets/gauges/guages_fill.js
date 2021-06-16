@@ -22,7 +22,7 @@
                             }
                             else
                             {
-                                alertify.success(obj.message);
+                                alertify.error(obj.message);
                             }
                         }  
                      }

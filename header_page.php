@@ -20,9 +20,17 @@
          <!-- Alertify CSS-->
         <link href="assets/alertify/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css"/>
+         <!-- JQuery CSS-->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
         <!-- Alertify JS-->
         <script src="assets/alertify/alertify.js" type="text/javascript"></script>
         <script src="assets/alertify/alertify.min.js" type="text/javascript"></script>
+        <!-- JQuery JS-->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- Datepicker JS-->
+        <script src="assets/demo/datepickerCustom.js" type="text/javascript"></script>
     </head>
 
     <body class="">
@@ -40,7 +48,7 @@
                         </a>
                     </div>
                     <ul class="nav">
-                        <li class="active ">
+                        <li>
                             <a href="./product_view.php">
                                 <i class="tim-icons icon-chart-pie-36"></i>
                                 <p>Productividad</p>

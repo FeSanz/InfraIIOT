@@ -13,10 +13,7 @@ class OperationsFills
  
     function getFillInterval($startDate, $endDate)
     {
-       //intervalo de fechas temporales
-        $startDate = "2019-03-15";
-        $endDate = "2019-03-15";
-        
+       //intervalo de fechas temporales        
        $sqlFill = $this->con->prepare("
            SELECT llenados.id, llenados.fecha, llenados.porcentaje, llenados.presion, llenados.temperatura, cilindros.tipo, equipos.nombre, operadores.nombre 
            FROM llenados, cilindros, equipos, operadores 
@@ -73,10 +70,6 @@ class OperationsFills
 
    function getAlarmList($startDate, $endDate)
    {
-      //intervalo de fechas temporales
-      $startDate = "2019-03-14";
-      $endDate = "2019-03-19";
-      
       $AlarmsSQL = $this->con->prepare("
          SELECT alarmas.fecha, equipos.nombre, alarma_tipo.nombre 
          FROM alarmas, equipos, alarma_tipo 
@@ -104,11 +97,7 @@ class OperationsFills
    }
 
    function getAlarmGroups($startDate, $endDate)
-    {
-       //intervalo de fechas temporales
-        $startDate = "2019-03-15";
-        $endDate = "2019-03-19";
-        
+    {       
        $AlarmsSQL = $this->con->prepare("
             SELECT alarma_tipo.nombre, count(alarma_tipo.nombre) total 
             FROM alarmas, equipos, alarma_tipo 
