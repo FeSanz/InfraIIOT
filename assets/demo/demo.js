@@ -1,5 +1,6 @@
 //type = ['primary', 'info', 'success', 'warning', 'danger'];
 const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
+
 $(document).ready(function () {
     var today = new Date();
 
@@ -35,7 +36,7 @@ $(document).ready(function ()
         } else
         {
             var dateStart = new Date(startDateValue);
-            var dateEnd = new Date(startDateValue);
+            var dateEnd = new Date(endDateValue);
             var monthNumberStart = dateStart.getMonth();
             var monthEnd = dateEnd.getMonth();
             
@@ -47,6 +48,30 @@ $(document).ready(function ()
     });
 });
 
+$(document).ready(function ()
+{
+    $("#search_alarms_button").click(function ()
+    {
+        var startDateValue = $("#startDateAlarmsValue").val();
+        var endDateValue = $("#endDateAlarmsValue").val();
+
+        var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
+        if (difference < 0) {
+            alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
+        } else
+        {
+            var dateStart = new Date(startDateValue);
+            var dateEnd = new Date(endDateValue);
+            var monthNumberStart = dateStart.getMonth();
+            var monthEnd = dateEnd.getMonth();
+            
+            document.getElementById("dateSelectedGroups").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
+            //document.getElementById("dateSelectedPres").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
+            //document.getElementById("dateSelectedPer").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
+            ajaxIncidentOperation(startDateValue, endDateValue);
+        }
+    });
+});
 
 gradientChartOptionsConfigurationWithTooltipBlue = {
     maintainAspectRatio: false,
@@ -453,9 +478,9 @@ function ajaxIncidentOperation(startDay, endDay) {
     /* Llamada para obtener datos de alarmas por grupos (para grafica de dona) */
     jQuery.ajax({
         type: "GET",
-        url: 'api_fills.php',
+        url: 'api_alarms.php',
         dataType: 'json',
-        data: {api_fills: 'get_alarm_groups', startDate: startDay, endDate: endDay},
+        data: {api_alarms: 'get_alarm_groups', startDate: startDay, endDate: endDay},
         success: function (obj)
         {
             if (!obj.error && !jQuery.isEmptyObject(obj.alarmGroups))
@@ -494,7 +519,7 @@ function ajaxIncidentOperation(startDay, endDay) {
             {
                 if (jQuery.isEmptyObject(obj.alarmGroups))
                 {
-                    alertify.error('Seleccione otra fecha');
+                    alertify.error('Sin registros. Seleccione otra fecha');
                 } else
                 {
 
@@ -506,14 +531,17 @@ function ajaxIncidentOperation(startDay, endDay) {
     /* Llamada para obtener datos de alarmas (para la lista)  */
     jQuery.ajax({
         type: "GET",
-        url: 'api_fills.php',
+        url: 'api_alarms.php',
         dataType: 'json',
-        data: {api_fills: 'get_alarm_list', startDate: startDay, endDate: endDay},
+        data: {api_alarms: 'get_alarm_list', startDate: startDay, endDate: endDay},
         success: function (obj)
         {
             if (!obj.error && !jQuery.isEmptyObject(obj.alarmList))
             {
+                //Primero se tiene que limpiar la tabla 
                 var table = document.getElementById("tbody");
+                table.innerHTML = "";
+
                 var str = "";
                 var i;
                 for (i in obj.alarmList)
@@ -529,7 +557,7 @@ function ajaxIncidentOperation(startDay, endDay) {
             {
                 if (jQuery.isEmptyObject(obj.alarmList))
                 {
-                    alertify.error('La consulta no regresa datos');
+                    alertify.error('Sin registros. Seleccione otra fecha');
                 } else
                 {
 

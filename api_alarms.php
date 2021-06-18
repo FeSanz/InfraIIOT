@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db_operations_fills.php';
+require_once 'db_operations_alarms.php';
 
 function isTheseParametersAvailable($params) { 
     $available = true;
@@ -23,32 +23,15 @@ function isTheseParametersAvailable($params) {
 
 $response = array();
 
-#Si contienen la clave api_fills
-if (isset($_GET['api_fills'])) 
+#Si se llama a la api_alarms
+if (isset($_GET['api_alarms'])) 
 {
     #Dependiendo del valor de la clave se llamará una operación de BD
-    switch ($_GET['api_fills']) 
-    {
-        #Obtiene los parametros de llanado para dasboards
-        case 'get_fill_interval':
-            $db = new OperationsFills();
-            $response['error'] = false;
-            $response['message'] = 'Solicitud completada exitosamente';
-            $response['fillsInterval'] = $db->getFillInterval($_GET['startDate'], $_GET['endDate']);
-        break;
-    
-         #Obtiene la temperatura, presion y llenado en tiempo real
-        case 'get_current_fill':
-            $db = new OperationsFills();
-            $response['error'] = false;
-            $response['message'] = 'Solicitud completada exitosamente';
-            $response['currentFill'] = $db->getCurrentFill();
-        break;
-        
-        /*
+    switch ($_GET['api_alarms']) 
+    {   
         #Obtiene la lista de alarmas disparadas
         case 'get_alarm_list':
-            $db = new OperationsFills();
+            $db = new OperationsAlarms();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
             $response['alarmList'] = $db->getAlarmList($_GET['startDate'], $_GET['endDate']);
@@ -56,18 +39,20 @@ if (isset($_GET['api_fills']))
 
         #Obtiene la lista de alarmas por grupo
         case 'get_alarm_groups':
-            $db = new OperationsFills();
+            $db = new OperationsAlarms();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
             $response['alarmGroups'] = $db->getAlarmGroups($_GET['startDate'], $_GET['endDate']);
         break;
-            */
+        
+        /*
         case 'get_alarm_notification':
             $db = new OperationsFills();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
             $response['notification'] = $db->getDataNotifications();
         break;
+        */
     }
 } 
 else 

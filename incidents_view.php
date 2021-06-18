@@ -16,20 +16,20 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Inicio</label>
-                                            <input type="text" id="startDateValue" placeholder="Fecha inicial" class="form-control" required="required">
+                                            <input type="text" id="startDateAlarmsValue" placeholder="Fecha inicial" class="form-control" required="required">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Final</label>
-                                            <input type="text" id="endDateValue" placeholder="Fecha final" class="form-control" required="required">
+                                            <input type="text" id="endDateAlarmsValue" placeholder="Fecha final" class="form-control" required="required">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <br>
-                                        <button type="button" id="search_fills_button" class="btn btn-fill btn-primary">Buscar</button> 
+                                        <button type="button" id="search_alarms_button" class="btn btn-fill btn-primary">Buscar</button> 
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                     <div class="card card-chart" style="height: 40em;">
                         <div class="card-header">
                             <h5 class="card-category text-right">Registro de incidencias</h5>
-                            <h3 class="card-title"><i class="tim-icons icon-sound-wave text-success"></i> * </h3>
+                            <h3 id="dateSelectedGroups"class="card-title"><i class="tim-icons icon-sound-wave text-success"></i></h3>
                         </div>
                         <div class="card-body">
                             <div class="chart-area">
@@ -52,6 +52,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6 col-md-12">
                     <div class="card ">
                         <div class="card-header">
