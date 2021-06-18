@@ -45,7 +45,20 @@
         <!--Fin panel colores-->
         
         <!--   Core JS Files   -->
-<!--        <script src="assets/js/core/jquery.min.js"></script>-->
+<!--    <script src="assets/js/core/jquery.min.js"></script>-->
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         
+         <!-- JQuery JS-->
+<!--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- Datepicker JS-->
+        <script src="assets/demo/datepickerCustom.js" type="text/javascript"></script>
+        
+        <!-- Alertify JS-->
+        <script src="assets/alertify/alertify.js" type="text/javascript"></script>
+        <script src="assets/alertify/alertify.min.js" type="text/javascript"></script>
+ 
+         
         <script src="assets/js/core/popper.min.js"></script>
         <script src="assets/js/core/bootstrap.min.js"></script>
         <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
