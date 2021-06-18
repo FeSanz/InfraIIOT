@@ -42,7 +42,8 @@
                 <div class="col-lg-6">
                     <div class="card card-chart" style="height: 40em;">
                         <div class="card-header">
-                            <h5 class="card-category text-right">Registro de incidencias</h5>
+                            <h5 class="card-category">Registro de incidencias</h5>
+                            <!-- <h5 class="card-category text-right">Registro de incidencias</h5> -->
                             <h3 id="dateSelectedGroups"class="card-title"><i class="tim-icons icon-sound-wave text-success"></i></h3>
                         </div>
                         <div class="card-body">
@@ -56,7 +57,9 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="card ">
                         <div class="card-header">
-                            <h4 class="card-title"> Historial de incidencias</h4>
+                            <h5 class="card-category"> Historial de incidencias</h4>
+                            <!-- <h4 class="card-title"> Historial de incidencias</h4> -->
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

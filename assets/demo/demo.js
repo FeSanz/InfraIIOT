@@ -9,11 +9,31 @@ $(document).ready(function () {
     var yyyy = today.getFullYear();
 
     today = yyyy + '-' + mm + '-' + dd;
+    var firstDataDB = '2021-05-01';
 
+    function getNameURLWeb(){
+        var sPath = window.location.pathname;
+        var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+        return sPage;
+    }
 
-    var firstDataDB = '2021-05-15';
-    ajaxFillOperation(firstDataDB, today);
-    ajaxIncidentOperation(firstDataDB, today);
+    //Para obtener los datos de la página actual solamente
+    if (getNameURLWeb() == "incidents_view.php")
+    {
+        //Para obtener los datos del mes actual solamente
+        firstDataDB = yyyy + '-' + mm + '-' + '01';
+
+        document.getElementById("startDateAlarmsValue").value = firstDataDB;
+        document.getElementById("endDateAlarmsValue").value = today;
+        
+        ajaxIncidentOperation(firstDataDB, today);
+    }
+
+    if (getNameURLWeb() == "product_view.php")
+    {
+        ajaxFillOperation(firstDataDB, today);
+    }
+
 });
 
 $(document).ready(function () {
