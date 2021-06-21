@@ -99,7 +99,7 @@
                     <div class="card card-chart">
                         <div class="card-header">
                             <h5 class="card-category">Presión</h5>
-                            <h4 id="dateSelectedPres" class="card-title"><i class="tim-icons icon-sound-wave text-primary"></i></h4>
+                            <h4 id="dateSelectedPres" class="card-title"><i class="tim-icons icon-sound-wave text-success"></i></h4>
                         </div>
                         <div class="card-body">
                             <div class="chart-area">
@@ -114,7 +114,7 @@
                     <div class="card card-chart">
                         <div class="card-header">
                             <h5 class="card-category">Porcentaje</h5>
-                            <h4 id="dateSelectedPer" class="card-title"><i class="tim-icons icon-sound-wave text-success"></i></h4>
+                            <h4 id="dateSelectedPer" class="card-title"><i class="tim-icons icon-sound-wave text-danger"></i></h4>
                         </div>
                         <div class="card-body">
                             <div class="chart-area">

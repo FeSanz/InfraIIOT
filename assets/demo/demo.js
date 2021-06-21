@@ -31,6 +31,12 @@ $(document).ready(function () {
 
     if (getNameURLWeb() == "product_view.php")
     {
+        //Para obtener los datos del mes actual solamente
+        firstDataDB = yyyy + '-' + mm + '-' + '01';
+
+        document.getElementById("startDateValue").value = firstDataDB;
+        document.getElementById("endDateValue").value = today;
+        
         ajaxFillOperation(firstDataDB, today);
     }
 
@@ -363,14 +369,20 @@ function ajaxFillOperation(startDay, endDay)
             } else
             {
                 var datesFills = [];
+                var dayFill = [];
                 var temperatureFills = [];
                 var presionFills = [];
                 var percentageFills = [];
 
+                
+          
                 var i;
                 for (i in obj.fillsInterval)
                 {
                     datesFills.push(obj.fillsInterval[i].fecha);
+                    var myDate = new Date(obj.fillsInterval[i].fecha);
+                    var day = myDate.getDay();
+                    dayFill.push(day);
                     percentageFills.push(obj.fillsInterval[i].porcentaje);
                     presionFills.push(obj.fillsInterval[i].presion);
                     temperatureFills.push(obj.fillsInterval[i].temperatura);
@@ -385,13 +397,13 @@ function ajaxFillOperation(startDay, endDay)
                 gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
                 var data = {
-                    labels: datesFills,
+                    labels: dayFill,
                     datasets: [{
-                            label: "*",
+                            label: "Temperatura",
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderColor: '#d048b6',
-                            borderWidth: 2,
+                            borderWidth: 1,
                             borderDash: [],
                             borderDashOffset: 0.0,
                             pointBackgroundColor: '#d048b6',

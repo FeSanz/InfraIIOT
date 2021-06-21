@@ -29,7 +29,7 @@
                  });  
    }
    
-   function buildGauges(temperature, pressure, percentage, success)
+   function buildGauges(temperature, pressure, percentage)
    {
        //54°C temperatura maxima 
        //3200 PSI presion maxima
@@ -130,6 +130,11 @@
                 label.verticalCenter = "middle";
                 label.fontSize = 20;
    }
+
+$(document).ready(function () {
+     buildGauges(0,0,0); 
+     getFillsGauges(); 
+});
 
 setInterval(
     function()
