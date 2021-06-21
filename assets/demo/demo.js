@@ -8,7 +8,9 @@ $(document).ready(function () {
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
 
+    //Para obtener los datos del mes actual solamente
     today = yyyy + '-' + mm + '-' + dd;
+    //var firstDataDB = yyyy + '-' + mm + '-' + '01';
     var firstDataDB = '2021-05-01';
 
     function getNameURLWeb(){
@@ -20,11 +22,9 @@ $(document).ready(function () {
     //Para obtener los datos de la página actual solamente
     if (getNameURLWeb() == "incidents_view.php")
     {
-        //Para obtener los datos del mes actual solamente
-        firstDataDB = yyyy + '-' + mm + '-' + '01';
-
-        document.getElementById("startDateAlarmsValue").value = firstDataDB;
-        document.getElementById("endDateAlarmsValue").value = today;
+        //Ponemos las fechas en los campos de busqueda
+        document.getElementById("startDateValue").value = firstDataDB;
+        document.getElementById("endDateValue").value = today;
         
         ajaxIncidentOperation(firstDataDB, today);
     }
@@ -72,22 +72,14 @@ $(document).ready(function ()
 {
     $("#search_alarms_button").click(function ()
     {
-        var startDateValue = $("#startDateAlarmsValue").val();
-        var endDateValue = $("#endDateAlarmsValue").val();
+        var startDateValue = $("#startDateValue").val();
+        var endDateValue = $("#endDateValue").val();
 
         var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
         if (difference < 0) {
             alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
         } else
         {
-            var dateStart = new Date(startDateValue);
-            var dateEnd = new Date(endDateValue);
-            var monthNumberStart = dateStart.getMonth();
-            var monthEnd = dateEnd.getMonth();
-            
-            document.getElementById("dateSelectedGroups").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
-            //document.getElementById("dateSelectedPres").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
-            //document.getElementById("dateSelectedPer").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
             ajaxIncidentOperation(startDateValue, endDateValue);
         }
     });
@@ -509,20 +501,26 @@ function ajaxIncidentOperation(startDay, endDay) {
                 var totales = [];
 
                 var i;
+                var totalAlarmas = 0;
                 for (i in obj.alarmGroups)
                 {
                     nombres.push(obj.alarmGroups[i].nombre);
                     totales.push(obj.alarmGroups[i].total);
+                    totalAlarmas = totalAlarmas + obj.alarmGroups[i].total;
                 }
 
+                //Obtenemos los nombres de los meses para escribirlos junto con el total
+                document.getElementById("dateSelectedGroups").innerHTML = 
+                months[parseInt(startDay.substring(5,7)-1)] + " - " + months[parseInt(endDay.substring(5,7))-1] + "  Total: " + totalAlarmas;
+                
                 /************************Doughnut Chart****************/
                 var ctxDoughnut = document.getElementById("chartDoughnut").getContext("2d");
-
+                
                 var data = {
                     labels: nombres /*['INC.', 'INC.2', 'INC.3', 'INC.4', 'INC.5']*/,
                     datasets: [{
                             label: "Incidencias",
-                            backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', "#a3c7c9"],
+                            backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#a3c7c9', '#bc3hb2'],
                             data: totales /*[10, 20, 30, 15, 25]*/
                         }]
                 };
@@ -535,7 +533,9 @@ function ajaxIncidentOperation(startDay, endDay) {
                 });
 
                 /****************Final Doughnut Chart****************************/
-            } else
+            } 
+            //Para no repetir el mensaje de no hay datos (Se valida en get_alarm_list)
+            /*else
             {
                 if (jQuery.isEmptyObject(obj.alarmGroups))
                 {
@@ -545,6 +545,7 @@ function ajaxIncidentOperation(startDay, endDay) {
 
                 }
             }
+            */
         }
     });
 
