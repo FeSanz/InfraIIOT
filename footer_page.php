@@ -78,6 +78,7 @@
         <script src="https://www.amcharts.com/lib/4/charts.js"></script>
         <script src="assets/gauges/guages_fill.js" type="text/javascript"></script>
    
+        <!-- No está el script
         <script>
             $(document).ready(function () {
                 // Javascript method's body can be found in assets/js/demos.js
@@ -85,6 +86,8 @@
 
             });
         </script>
+        -->
+
         <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
         <script>
             window.TrackJS &&
