@@ -91,7 +91,7 @@ $(document).ready(function ()
     });
 });
 
-gradientChartOptionsConfigurationWithTooltipBlue = {
+gradientChartTemperature = {
     maintainAspectRatio: false,
     legend: {
         display: false
@@ -117,56 +117,8 @@ gradientChartOptionsConfigurationWithTooltipBlue = {
                     zeroLineColor: "transparent",
                 },
                 ticks: {
-                    suggestedMin: 60,
-                    suggestedMax: 125,
-                    padding: 20,
-                    fontColor: "#2380f7"
-                }
-            }],
-
-        xAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.1)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    padding: 20,
-                    fontColor: "#2380f7"
-                }
-            }]
-    }
-};
-
-gradientChartOptionsConfigurationWithTooltipPurple = {
-    maintainAspectRatio: false,
-    legend: {
-        display: false
-    },
-
-    tooltips: {
-        backgroundColor: '#f5f5f5',
-        titleFontColor: '#333',
-        bodyFontColor: '#666',
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest"
-    },
-    responsive: true,
-    scales: {
-        yAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.0)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    suggestedMin: 60,
-                    suggestedMax: 125,
+                    suggestedMin: 10,
+                    suggestedMax: 60,
                     padding: 20,
                     fontColor: "#9a9a9a"
                 }
@@ -180,14 +132,15 @@ gradientChartOptionsConfigurationWithTooltipPurple = {
                     zeroLineColor: "transparent",
                 },
                 ticks: {
-                    padding: 20,
+                    display: false,
+                    padding: 10,
                     fontColor: "#9a9a9a"
                 }
             }]
     }
 };
 
-gradientChartOptionsConfigurationWithTooltipOrange = {
+gradientChartPressure = {
     maintainAspectRatio: false,
     legend: {
         display: false
@@ -213,10 +166,10 @@ gradientChartOptionsConfigurationWithTooltipOrange = {
                     zeroLineColor: "transparent",
                 },
                 ticks: {
-                    suggestedMin: 50,
-                    suggestedMax: 110,
+                    suggestedMin: 10,
+                    suggestedMax: 3200,
                     padding: 20,
-                    fontColor: "#ff8a76"
+                    fontColor: "#2380f7"
                 }
             }],
 
@@ -224,18 +177,19 @@ gradientChartOptionsConfigurationWithTooltipOrange = {
                 barPercentage: 1.6,
                 gridLines: {
                     drawBorder: false,
-                    color: 'rgba(220,53,69,0.1)',
+                    color: 'rgba(29,140,248,0.1)',
                     zeroLineColor: "transparent",
                 },
                 ticks: {
-                    padding: 20,
-                    fontColor: "#ff8a76"
+                    display: false,
+                    padding: 10,
+                    fontColor: "#2380f7"
                 }
             }]
     }
 };
 
-gradientChartOptionsConfigurationWithTooltipGreen = {
+gradientChartPercentage = {
     maintainAspectRatio: false,
     legend: {
         display: false
@@ -261,8 +215,8 @@ gradientChartOptionsConfigurationWithTooltipGreen = {
                     zeroLineColor: "transparent",
                 },
                 ticks: {
-                    suggestedMin: 50,
-                    suggestedMax: 125,
+                    suggestedMin: 10,
+                    suggestedMax: 100,
                     padding: 20,
                     fontColor: "#9e9e9e"
                 }
@@ -276,7 +230,8 @@ gradientChartOptionsConfigurationWithTooltipGreen = {
                     zeroLineColor: "transparent",
                 },
                 ticks: {
-                    padding: 20,
+                    display: false,
+                    padding: 10,
                     fontColor: "#9e9e9e"
                 }
             }]
@@ -293,54 +248,6 @@ gradientDoughnut = {
             display: true,
             text: 'Chart.js Doughnut Chart'
         }
-    }
-};
-
-gradientBarChartConfiguration = {
-    maintainAspectRatio: false,
-    legend: {
-        display: false
-    },
-
-    tooltips: {
-        backgroundColor: '#f5f5f5',
-        titleFontColor: '#333',
-        bodyFontColor: '#666',
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest"
-    },
-    responsive: true,
-    scales: {
-        yAxes: [{
-
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.1)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    suggestedMin: 60,
-                    suggestedMax: 120,
-                    padding: 20,
-                    fontColor: "#9e9e9e"
-                }
-            }],
-
-        xAxes: [{
-
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.1)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    padding: 20,
-                    fontColor: "#9e9e9e"
-                }
-            }]
     }
 };
 
@@ -361,20 +268,14 @@ function ajaxFillOperation(startDay, endDay)
             } else
             {
                 var datesFills = [];
-                var dayFill = [];
                 var temperatureFills = [];
                 var presionFills = [];
                 var percentageFills = [];
-
-                
           
                 var i;
                 for (i in obj.fillsInterval)
                 {
                     datesFills.push(obj.fillsInterval[i].fecha);
-                    var myDate = new Date(obj.fillsInterval[i].fecha);
-                    var day = myDate.getDay();
-                    dayFill.push(day);
                     percentageFills.push(obj.fillsInterval[i].porcentaje);
                     presionFills.push(obj.fillsInterval[i].presion);
                     temperatureFills.push(obj.fillsInterval[i].temperatura);
@@ -389,7 +290,7 @@ function ajaxFillOperation(startDay, endDay)
                 gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
                 var data = {
-                    labels: dayFill,
+                    labels: datesFills,
                     datasets: [{
                             label: "Temperatura",
                             fill: true,
@@ -412,7 +313,7 @@ function ajaxFillOperation(startDay, endDay)
                 var myChart = new Chart(ctx, {
                     type: 'line',
                     data: data,
-                    options: gradientChartOptionsConfigurationWithTooltipPurple
+                    options: gradientChartTemperature
                 });
 
                 /**************Fin Temperatura Chart***************/
@@ -429,7 +330,7 @@ function ajaxFillOperation(startDay, endDay)
                 var data = {
                     labels: datesFills,
                     datasets: [{
-                            label: "Info.",
+                            label: "Presión",
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderColor: '#0ea5c4',
@@ -450,7 +351,7 @@ function ajaxFillOperation(startDay, endDay)
                 var myChart = new Chart(ctxGreen, {
                     type: 'line',
                     data: data,
-                    options: gradientChartOptionsConfigurationWithTooltipBlue
+                    options: gradientChartPressure
 
                 });
                 /**************Fin Presion Chart***************/
@@ -468,7 +369,7 @@ function ajaxFillOperation(startDay, endDay)
                 var data = {
                     labels: datesFills,
                     datasets: [{
-                            label: "Info.",
+                            label: "Porcentaje",
                             fill: true,
                             backgroundColor: gradientStroke,
                             borderColor: '#00d6b4',
@@ -489,7 +390,7 @@ function ajaxFillOperation(startDay, endDay)
                 var myChart = new Chart(ctxGreen, {
                     type: 'line',
                     data: data,
-                    options: gradientChartOptionsConfigurationWithTooltipGreen
+                    options: gradientChartPercentage
 
                 });
                 /**************Fin Porcentaje Chart***************/
