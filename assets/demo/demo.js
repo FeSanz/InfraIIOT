@@ -10,8 +10,7 @@ $(document).ready(function () {
 
     //Para obtener los datos del mes actual solamente
     today = yyyy + '-' + mm + '-' + dd;
-    //var firstDataDB = yyyy + '-' + mm + '-' + '01';
-    var firstDataDB = '2021-05-01';
+    var firstDataDB = yyyy + '-' + mm + '-' + '01';
 
     function getNameURLWeb(){
         var sPath = window.location.pathname;
@@ -32,7 +31,7 @@ $(document).ready(function () {
     if (getNameURLWeb() == "product_view.php")
     {
         //Para obtener los datos del mes actual solamente
-        firstDataDB = yyyy + '-' + mm + '-' + '01';
+        //firstDataDB = yyyy + '-' + mm + '-' + '01';
 
         document.getElementById("startDateValue").value = firstDataDB;
         document.getElementById("endDateValue").value = today;
