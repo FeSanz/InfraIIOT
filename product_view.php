@@ -55,14 +55,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Inicio</label>
-                                        <input type="text" id="startDateValue" placeholder="Fecha inicial" class="form-control" required="required">
+                                        <label>Fecha Inicial</label>
+                                        <input type="text" id="startDateValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="">Final</label>
-                                        <input type="text" id="endDateValue" placeholder="Fecha final" class="form-control" required="required">
+                                        <label for="">Final Final</label>
+                                        <input type="text" id="endDateValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
                                     </div>
                                 </div>
 

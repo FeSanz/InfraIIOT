@@ -30,12 +30,16 @@ $(document).ready(function () {
 
     if (getNameURLWeb() == "product_view.php")
     {
-        //Para obtener los datos del mes actual solamente
-        //firstDataDB = yyyy + '-' + mm + '-' + '01';
+         const startDateInput = document.getElementById('startDateValue');
+         const endDateInput = document.getElementById('endDateValue');
+         //Bloquea pegado en inputs
+         startDateInput.onpaste = e => e.preventDefault();
+         endDateInput.onpaste = e => e.preventDefault();
 
         document.getElementById("startDateValue").value = firstDataDB;
         document.getElementById("endDateValue").value = today;
         
+        MonthValue(firstDataDB, today);
         ajaxFillOperation(firstDataDB, today);
     }
 
@@ -45,7 +49,7 @@ $(document).ready(function () {
     GetNotifications();
     setInterval(function(){
         GetNotifications();
-    },5000)
+    },5000);
 });
 
 $(document).ready(function ()
@@ -54,24 +58,67 @@ $(document).ready(function ()
     {
         var startDateValue = $("#startDateValue").val();
         var endDateValue = $("#endDateValue").val();
-
-        var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
-        if (difference < 0) {
-            alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
-        } else
+        if (isValidDate(startDateValue) && isValidDate(endDateValue))
         {
-            var dateStart = new Date(startDateValue);
-            var dateEnd = new Date(endDateValue);
-            var monthNumberStart = dateStart.getMonth();
-            var monthEnd = dateEnd.getMonth();
-            
-            document.getElementById("dateSelectedTemp").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
-            document.getElementById("dateSelectedPres").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
-            document.getElementById("dateSelectedPer").innerHTML = months[monthNumberStart] + " - " + months[monthEnd];
-            ajaxFillOperation(startDateValue, endDateValue);
+            var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
+            if (difference < 0) {
+                alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
+            } else
+            {
+                MonthValue(startDateValue, endDateValue);
+                ajaxFillOperation(startDateValue, endDateValue);
+            }
+        }
+        else
+        {
+            alertify.error("Formato de fecha incorrecto. Verifique yyyy-mm-dd")
         }
     });
 });
+
+/*Obtiene el intervalo de meses consultados*/
+function MonthValue(startDate, endDate)
+{
+    var dateStart = new Date(startDate);
+    var dateEnd = new Date(endDate);
+    var monthNumberStart = dateStart.getMonth();
+    var monthNumberEnd = dateEnd.getMonth();
+
+    document.getElementById("dateSelectedTemp").innerHTML = months[monthNumberStart] + " - " + months[monthNumberEnd];
+    document.getElementById("dateSelectedPres").innerHTML = months[monthNumberStart] + " - " + months[monthNumberEnd];
+    document.getElementById("dateSelectedPer").innerHTML = months[monthNumberStart] + " - " + months[monthNumberEnd];
+}
+
+/* Valida que solo se escriban numeros y "-" en los campos de fecha*/
+
+function validateKeypress() {
+    /*
+        var alpha = /[ A-Za-z]/;
+        var numeric = /[0-9]/; 
+        var alphanumeric = /[ A-Za-z0-9]/;
+     */
+    var dateKey =  /[0-9]/;
+    var keyChar = String.fromCharCode(event.which || event.keyCode);
+    return dateKey.test(keyChar) ? keyChar : false;
+}
+
+/* True -> Si la fecha tiene el formato adecuado yyyy-mm-dd
+ * False -> Si la fecha esta escrita mal*/
+function isValidDate(dateString)
+{
+  var regEx = /^\d{4}-\d{2}-\d{2}$/;
+  if(!dateString.match(regEx))// Formato invalido
+  {
+      return false; 
+  }
+  var d = new Date(dateString);
+  var dNum = d.getTime();
+  if(!dNum && dNum !== 0)  // NaN value, Fecha invalida
+  {
+      return false;
+  }
+  return d.toISOString().slice(0,10) === dateString;
+}
 
 $(document).ready(function ()
 {
