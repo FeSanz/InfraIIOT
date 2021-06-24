@@ -59,7 +59,6 @@
                         <div class="card-header">
                             <h5 class="card-category"> Historial de incidencias</h4>
                             <!-- <h4 class="card-title"> Historial de incidencias</h4> -->
-
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

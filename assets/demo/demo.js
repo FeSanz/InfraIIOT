@@ -21,6 +21,13 @@ $(document).ready(function () {
     //Para obtener los datos de la página actual solamente
     if (getNameURLWeb() == "incidents_view.php")
     {
+        const startDateInput = document.getElementById('startDateValue');
+        const endDateInput = document.getElementById('endDateValue');
+         
+        //Bloquea pegado en inputs
+        startDateInput.onpaste = e => e.preventDefault();
+        endDateInput.onpaste = e => e.preventDefault();
+
         //Ponemos las fechas en los campos de busqueda
         document.getElementById("startDateValue").value = firstDataDB;
         document.getElementById("endDateValue").value = today;
@@ -126,13 +133,20 @@ $(document).ready(function ()
     {
         var startDateValue = $("#startDateValue").val();
         var endDateValue = $("#endDateValue").val();
-
-        var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
-        if (difference < 0) {
-            alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
-        } else
+        
+        if (isValidDate(startDateValue) && isValidDate(endDateValue))
         {
-            ajaxIncidentOperation(startDateValue, endDateValue);
+            var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
+            if (difference < 0) {
+                alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
+            } else
+            {
+                ajaxIncidentOperation(startDateValue, endDateValue);
+            }
+        }
+        else
+        {
+            alertify.error("Formato de fecha incorrecto. Verifique yyyy-mm-dd")
         }
     });
 });
@@ -291,7 +305,7 @@ gradientDoughnut = {
             position: 'top',
         },
         title: {
-            display: true,
+            display: false, //true,
             text: 'Chart.js Doughnut Chart'
         }
     }
@@ -445,6 +459,8 @@ function ajaxFillOperation(startDay, endDay)
     });
 }
 
+var myChart;
+
 function ajaxIncidentOperation(startDay, endDay) {
     /* Llamada para obtener datos de alarmas por grupos (para grafica de dona) */
     jQuery.ajax({
@@ -454,6 +470,10 @@ function ajaxIncidentOperation(startDay, endDay) {
         data: {api_alarms: 'get_alarm_groups', startDate: startDay, endDate: endDay},
         success: function (obj)
         {
+            //var myChart;
+            var meses = document.getElementById("dateSelectedGroups");
+            var ctxDoughnut = document.getElementById("chartDoughnut").getContext("2d");
+
             if (!obj.error && !jQuery.isEmptyObject(obj.alarmGroups))
             {
                 var nombres = [];
@@ -469,23 +489,45 @@ function ajaxIncidentOperation(startDay, endDay) {
                 }
 
                 //Obtenemos los nombres de los meses para escribirlos junto con el total
-                document.getElementById("dateSelectedGroups").innerHTML = 
-                months[parseInt(startDay.substring(5,7)-1)] + " - " + months[parseInt(endDay.substring(5,7))-1] + "  Total: " + totalAlarmas;
+                meses.innerHTML = months[parseInt(startDay.substring(5,7)-1)] + " - " + 
+                                months[parseInt(endDay.substring(5,7))-1] + "  Total: " + 
+                                totalAlarmas;
                 
-                /************************Doughnut Chart****************/
-                var ctxDoughnut = document.getElementById("chartDoughnut").getContext("2d");
-                
+                /************************Doughnut Chart****************/                
                 var data = {
                     labels: nombres /*['INC.', 'INC.2', 'INC.3', 'INC.4', 'INC.5']*/,
                     datasets: [{
                             label: "Incidencias",
-                            backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#a3c7c9', '#bc3hb2'],
+                            backgroundColor: [
+                                '#4dc9f6',
+                                '#f67019',
+                                '#f53794',
+                                '#537bc4',
+                                '#acc236',
+                                '#166a8f',
+                                '#00a950',
+                                '#58595b',
+                                '#8549ba',
+                                '#c0392b',
+                                '#9b59b6',
+                                '#2980b9',
+                                '#1abc9c',
+                                '#d35400',
+                                '#2e4053',
+                                '#6d1f35' 
+                              ],
                             data: totales /*[10, 20, 30, 15, 25]*/
                         }]
                 };
 
-                var myChart = new Chart(ctxDoughnut, {
-                    type: 'doughnut',
+                //Para evitar el bug que mostraba la gráfica anterior bajo la nueva
+                if (myChart != null)
+                {
+                    myChart.destroy();
+                }
+                
+                myChart = new Chart(ctxDoughnut, {
+                    type: 'pie',
                     data: data,
                     options: gradientDoughnut,
                     responsive: true,
@@ -493,18 +535,21 @@ function ajaxIncidentOperation(startDay, endDay) {
 
                 /****************Final Doughnut Chart****************************/
             } 
-            //Para no repetir el mensaje de no hay datos (Se valida en get_alarm_list)
-            /*else
+            else
             {
+                //Si no se obtuvieron datos
                 if (jQuery.isEmptyObject(obj.alarmGroups))
                 {
-                    alertify.error('Sin registros. Seleccione otra fecha');
-                } else
-                {
+                    //Ya se manda el mensaje en la función que llena la tabla
+                    //alertify.error('Sin registros. Seleccione otra fecha');
 
+                    // Se borra la gráfica
+                    myChart.destroy();
+
+                    //Se limpia el mensaje de los meses
+                    document.getElementById("dateSelectedGroups").innerHTML = "";
                 }
             }
-            */
         }
     });
 
@@ -516,12 +561,14 @@ function ajaxIncidentOperation(startDay, endDay) {
         data: {api_alarms: 'get_alarm_list', startDate: startDay, endDate: endDay},
         success: function (obj)
         {
+            var table = document.getElementById("tbody");
+
             if (!obj.error && !jQuery.isEmptyObject(obj.alarmList))
             {
-                //Primero se tiene que limpiar la tabla 
-                var table = document.getElementById("tbody");
+                //Primero se tiene que limpiar la tabla para no añadirle las lineas
                 table.innerHTML = "";
 
+                //Se insertan las lineas generadas
                 var str = "";
                 var i;
                 for (i in obj.alarmList)
@@ -535,13 +582,12 @@ function ajaxIncidentOperation(startDay, endDay) {
                 }
             } else
             {
-                if (jQuery.isEmptyObject(obj.alarmList))
+                //Si no obtuvimos resultados limpiamos la tabla
+                if (jQuery.isEmptyObject(obj.alarmList))    //Esto se puede meter en un variable bool y hacer solo una vez el llamado a la funcion
                 {
+                    table.innerHTML = "";
                     alertify.error('Sin registros. Seleccione otra fecha');
-                } else
-                {
-
-                }
+                } 
             }
         }
     });
