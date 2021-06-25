@@ -26,14 +26,30 @@ $response = array();
 if (isset($_GET['api_notificaciones'])) 
 {
     switch ($_GET['api_notificaciones']) 
-    {
+    {/*
         case 'get_notificaciones':
             $db = new OperationsNotificaciones();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
             $response['notificaciones'] = $db->getNotificaciones();
+        break;*/
+        
+        case 'get_alarm_notification':
+            $db = new OperationsNotificaciones();
+            $response['error'] = false;
+            $response['message'] = 'Solicitud completada exitosamente';
+            $response['notification'] = $db->getDataNotifications();
+        break;
+        
+        
+        case 'get_alarms_number':
+            $db = new OperationsNotificaciones();
+            $response['error'] = false;
+            $response['message'] = 'Solicitud completada exitosamente';
+            $response['number'] = $db->getNumberNotifications();
         break;
     }
+    
 }
 
 if(isset($_POST['notification_view'])){

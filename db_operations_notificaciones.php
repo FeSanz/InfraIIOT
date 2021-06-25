@@ -1,44 +1,64 @@
 <?php
- 
+
 class OperationsNotificaciones
 {
     private $con;
- 
+
     function __construct()
     {
         require_once dirname(__FILE__) . '/db_connect.php';
         $db = new DatabaseConnect();
         $this->con = $db->connect();
     }
-    function getNotificaciones()
+
+    function getNumberNotifications()
     {
 
-       $sqlNotificaciones = $this->con->prepare("
-       SELECT alarmas.fecha, equipos.nombre, alarma_tipo.nombre 
-       FROM alarmas, equipos, alarma_tipo 
-       WHERE alarmas.equipo = equipos.id AND alarmas.alarma_tipos = alarma_tipo.id AND alarmas.status = 1 ");
-       $sqlNotificaciones->execute();
-       $sqlNotificaciones->bind_result($fecha,$nombre_equipo, $nombre_alarma);
+        $sqlNotifications = $this->con->prepare("Select count(*) from alarmas where STATUS = 1");
+        $sqlNotifications->execute();
+        $sqlNotifications->bind_result($number);
 
-       $fill_json = array(); 
+        $number_json = array();
 
-       while($sqlNotificaciones->fetch())
-       {
-          $fill_array  = array();
-          $fill_array['fecha'] = $fecha;  
-          $fill_array['nombre_equipo'] = $nombre_equipo; 
-          $fill_array['nombre_alarma'] = $nombre_alarma;
+        while ($sqlNotifications->fetch()) {
+            $number_array  = array();
+            $number_array['number'] = $number;
 
-          array_push($fill_json, $fill_array); 
-       }
+            array_push($number_json, $number_array);
+        }
 
-       return $fill_json; 
+        return $number_json;
     }
+    function getDataNotifications()
+    {
+        $sqlNotifications = $this->con->prepare("
+            SELECT alarmas.id, alarmas.fecha, equipos.nombre, alarma_tipo.nombre 
+            FROM alarmas, equipos, alarma_tipo 
+            WHERE alarmas.equipo = equipos.id 
+            AND alarmas.alarma_tipos = alarma_tipo.id 
+            AND alarmas.`status` = 1");
+        $sqlNotifications->execute();
+        $sqlNotifications->bind_result($id, $fecha, $nombreEquipo, $alarmaTipo);
 
-    function onViewNotification($id){
-        $fill_json_view = array(); 
+        $notifications_json = array();
+
+        while ($sqlNotifications->fetch()) {
+            $notifications_array  = array();
+            $notifications_array['id'] = $id;
+            $notifications_array['fecha'] = $fecha;
+            $notifications_array['nombreEquipo'] = $nombreEquipo;
+            $notifications_array['alarmaTipo'] = $alarmaTipo;
+
+            array_push($notifications_json, $notifications_array);
+        }
+
+        return $notifications_json;
+    }
+    function onViewNotification($id)
+    {
+        $fill_json_view = array();
         $sqlViewNotification = $this->con->prepare("
-        UPDATE alarmas SET alarmas.status = 0 WHERE alarmas.id = " .$id );
+        UPDATE alarmas SET alarmas.status = 0 WHERE alarmas.id = " . $id);
         $sqlViewNotification->execute();
         $fill_array_view = array();
         $fill_array_view['error'] = false;

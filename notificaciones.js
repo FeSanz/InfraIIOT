@@ -1,15 +1,32 @@
+var numeroNotificaciones = 0;
 function GetNotifications(){
+    
     jQuery.ajax({
         type: "GET",
-        url: 'api_fills.php',
+        url: 'api_notificaciones.php',
         dataType: 'json',
-        data: { api_fills: 'get_alarm_notification' },
+        data: {api_notificaciones: 'get_alarms_number'},
+        success: function (response)
+        { 
+            if(response.number[0].number!=numeroNotificaciones){
+                GetAllNotifications();
+            }
+        }
+    })
+}
+function GetAllNotifications(){
+    jQuery.ajax({
+        type: "GET",
+        url: 'api_notificaciones.php',
+        dataType: 'json',
+        data: { api_notificaciones: 'get_alarm_notification'},
         success: function (data) {
+            console.log("Hemos cargado todas las notificaciones");
             var lista = document.getElementById("alertList");
             //lista.className = "list-group";
             document.getElementById("numAlerts").innerText = data.notification.length;
             lista.innerHTML = "";
-            
+            numeroNotificaciones = data.notification.length;
             if(!data.notification.length){
                 lista.innerHTML =
                     '<li class="nav-link"><a href="#" class="nav-item dropdown-item">No hay notificaciones</a></li>';
@@ -34,7 +51,6 @@ function GetNotifications(){
         }
     });
 }
-
 function NotifiacationView(id, alarma, fecha, equipo){
     document.getElementById('tituloAlerta').innerText = alarma;
     document.getElementById('informacionModalAlerta').innerHTML = "Fecha: <strong>"+fecha+"</strong>"+
