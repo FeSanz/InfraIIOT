@@ -61,6 +61,11 @@ $(document).ready(function () {
 
 $(document).ready(function ()
 {
+    if(sessionStorage.getItem('User')==""){
+        
+        location.href = 'index.html';
+        return;
+    }
     $("#search_fills_button").click(function ()
     {
         var startDateValue = $("#startDateValue").val();

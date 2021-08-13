@@ -16,7 +16,9 @@ signinForm.addEventListener('submit', (e) => {
         .then((userCredential) => {
             //clear form
             document.getElementById("errorMessageSession").innerText = "";
-            localStorage.setItem("User", email)
+            //localStorage.setItem("User", email)
+            sessionStorage.setItem("User", email)
+            let data = sessionStorage.getItem('User');
             signinForm.reset();
             //console.log('sign in OK')
             // ...
@@ -24,6 +26,7 @@ signinForm.addEventListener('submit', (e) => {
         .catch((error) => {
             var errorCode = error.code;
             document.getElementById("errorMessageSession").innerText = "Usuario o contraseña incorrectos";
+            sessionStorage.clear();
             /*var errorMessage = error.message;
             console.log(errorMessage);
             console.log(errorCode);

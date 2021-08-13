@@ -9,16 +9,18 @@ logout.addEventListener('click', e => {
 
 function initApp() {
     // Listening for auth state changes.
-    
     firebase.auth().onAuthStateChanged(
         function (user) {
             if (!user) {
-                localStorage.setItem("User", "");
                 location.href = 'index.html';
+                //localStorage.setItem("User", "");
+                sessionStorage.setItem("User", "");
+                return;
             }
         });
 
-    document.getElementById("userName").innerText = localStorage.getItem("User");
+    //document.getElementById("userName").innerText = localStorage.getItem("User");
+    document.getElementById("userName").innerText = sessionStorage.getItem('User');
     //setInterval(function(){
     //}, 1000);
 }

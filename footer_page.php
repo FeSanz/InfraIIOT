@@ -42,8 +42,8 @@
               </ul>
             </div>
         </div>
-        <!--Fin panel colores-->
-        
+        <!--Sesión-->
+        <script src="assets/js/storage.js"></script>
         <!--   Core JS Files   -->
 <!--    <script src="assets/js/core/jquery.min.js"></script>-->
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -104,7 +104,6 @@
         <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
         <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-        <script src="assets/js/storage.js"></script>
         <script src="notificaciones.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
 
