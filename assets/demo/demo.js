@@ -336,6 +336,10 @@ function ajaxFillOperation(startDay, endDay)
                 var temperatureFills = [];
                 var presionFills = [];
                 var percentageFills = [];
+                
+                var temperatureMaxMin = [];
+                var presionMaxMin = [];
+                var percentageMaxMin = [];
           
                 var i;
                 var totalTemperature = 0;
@@ -347,6 +351,11 @@ function ajaxFillOperation(startDay, endDay)
                 var tempDate = dateSplit(obj.fillsInterval[0].fecha);
                 for (i in obj.fillsInterval)
                 {
+                    temperatureMaxMin.push(obj.fillsInterval[i].temperatura);
+                    presionMaxMin.push(obj.fillsInterval[i].presion);
+                    percentageMaxMin.push(obj.fillsInterval[i].porcentaje);
+                    
+                    
                     var rowDate = dateSplit(obj.fillsInterval[i].fecha);
                     if(rowDate === tempDate)
                     { 
@@ -385,6 +394,13 @@ function ajaxFillOperation(startDay, endDay)
                     datesFills.push(dateSplit(obj.fillsInterval[obj.fillsInterval.length-1].fecha));
                 }
                 
+                document.getElementById("minTemperature").innerHTML = "Min. " + Math.min.apply(Math, temperatureMaxMin);
+                document.getElementById("minPressure").innerHTML = "Min. " + Math.min.apply(Math, presionMaxMin);
+                document.getElementById("minPercentage").innerHTML = "Min. " + Math.min.apply(Math, percentageMaxMin);
+                
+                document.getElementById("maxTemperature").innerHTML = "Max. " + Math.max.apply(Math, temperatureMaxMin);
+                document.getElementById("maxPressure").innerHTML = "Max. " + Math.max.apply(Math, presionMaxMin);
+                document.getElementById("maxPercentage").innerHTML = "Max. " + Math.max.apply(Math, percentageMaxMin);
 //                var chart_labels = [];
 //                var chart_data = [];
 //               for (var i = 0; i < 65; i++)

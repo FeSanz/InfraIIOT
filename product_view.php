@@ -87,6 +87,18 @@
                                     <h5 class="card-category" id="dateSelectedTemp"></h5>
                                     <h4 class="card-title">Temperatura</h4>
                                 </div>
+                                <div class="col-sm-6">
+                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                                        <label class="btn btn-sm btn-primary btn-simple">
+                                            <input type="radio" name="options" checked>
+                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="minTemperature"></span>                                           
+                                        </label>
+                                        <label class="btn btn-sm btn-primary btn-simple">
+                                            <input type="radio" class="d-none d-sm-none" name="options">
+                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="maxTemperature"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -108,6 +120,18 @@
                                     <h5 class="card-category" id="dateSelectedPres"></h5>
                                     <h4 class="card-title">Presion</h4>
                                 </div>
+                                 <div class="col-sm-6">
+                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                                        <label class="btn btn-sm btn-primary btn-simple">
+                                            <input type="radio" name="options" checked>
+                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="minPressure"></span>
+                                        </label>
+                                        <label class="btn btn-sm btn-primary btn-simple">
+                                            <input type="radio" class="d-none d-sm-none" name="options">
+                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="maxPressure"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -128,6 +152,18 @@
                                 <div class="col-sm-6 text-left">
                                     <h5 class="card-category" id="dateSelectedPer"></h5>
                                     <h4 class="card-title">Porcentaje</h4>
+                                </div>
+                                    <div class="col-sm-6">
+                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                                        <label class="btn btn-sm btn-primary btn-simple">
+                                            <input type="radio" name="options" checked>
+                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="minPercentage"></span>
+                                        </label>
+                                        <label class="btn btn-sm btn-primary btn-simple">
+                                            <input type="radio" class="d-none d-sm-none" name="options">
+                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="maxPercentage"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
