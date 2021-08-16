@@ -3,7 +3,7 @@ $(function () {
         dateFormat: "yy-mm-dd",
         changeMonth: true,
         changeYear: true,
-        minDate: "2021-05-15",
+        minDate: "2021-08-01",
         maxDate: "0"
     });
     
@@ -11,7 +11,7 @@ $(function () {
         dateFormat: "yy-mm-dd",
         changeMonth: true,
         changeYear: true,
-        minDate: "2021-05-15",
+        minDate: "2021-08-01",
         maxDate: "0"
     });
     

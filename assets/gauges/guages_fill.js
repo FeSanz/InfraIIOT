@@ -43,7 +43,7 @@
                         "country": "Temperatura",
                         "value": tempVal
                     }, {
-                        "country": "Vacio",
+                        "country": "Restante",
                         "value": 100- tempVal
 
                     }];
@@ -75,7 +75,7 @@
                         "country": "Presión",
                         "value": presVal
                     }, {
-                        "country": "Vacio",
+                        "country": "Restante",
                         "value": 100 - presVal
 
                     }];
@@ -107,7 +107,7 @@
                         "country": "Porcentaje",
                         "value": percentage
                     }, {
-                        "country": "Vacio",
+                        "country": "Restante",
                         "value": 100 - percentage
 
                     }];
