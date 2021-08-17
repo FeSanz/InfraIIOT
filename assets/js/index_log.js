@@ -63,8 +63,10 @@ function initApp() {
         function (user) {
             if (user) {
                 location.href = 'product_view.php';
+                $(".loader").fadeOut("slow");   
             } else {
                 //console.log("log out");
+                $(".loader").fadeOut("slow");
             }
         });
     document.getElementById('forgotPass').addEventListener('click', sendPasswordReset, false);

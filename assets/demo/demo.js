@@ -66,6 +66,7 @@ $(document).ready(function ()
         location.href = 'index.html';
         return;
     }
+    $(".loader").fadeOut("slow");
     $("#search_fills_button").click(function ()
     {
         var startDateValue = $("#startDateValue").val();

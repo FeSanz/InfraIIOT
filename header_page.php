@@ -31,6 +31,7 @@
     </head>
 
     <body class="">
+        <div class="loader"></div>
         <div class="wrapper">
             
             <!-- Panel de navegación -->
