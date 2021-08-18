@@ -45,92 +45,45 @@
         <!--Sesión-->
         <script src="assets/js/storage.js"></script>
         <!--   Core JS Files   -->
-<!--    <script src="assets/js/core/jquery.min.js"></script>-->
-         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-         
-         <!-- JQuery JS-->
-<!--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="assets/local/js/jquery_3.6.0.js" type="text/javascript"></script>
+        <!-- JQuery JS-->
+        <script src="assets/local/js/jquery_ui_1.12.js" type="text/javascript"></script>
         <!-- Datepicker JS-->
         <script src="assets/demo/datepickerCustom.js" type="text/javascript"></script>
-        
         <!-- Alertify JS-->
         <script src="assets/alertify/alertify.js" type="text/javascript"></script>
         <script src="assets/alertify/alertify.min.js" type="text/javascript"></script>
- 
-         
+        <!-- Core min JS -->
         <script src="assets/js/core/popper.min.js"></script>
         <script src="assets/js/core/bootstrap.min.js"></script>
         <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
         <!-- Chart JS -->
         <script src="assets/js/plugins/chartjs.min.js"></script>
-        <!--  Notifications Plugin    -->
-        <script src="assets/js/plugins/bootstrap-notify.js"></script>
-        <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
-        
-        
-        <script src="assets/demo/demo.js"></script>
-        <script src="assets/demo/background_behaviour.js" type="text/javascript"></script>
-        
-        <!-- Gauge Charts -->
-        <script src="https://www.amcharts.com/lib/4/core.js"></script>
-        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-        <script src="assets/gauges/guages_fill.js" type="text/javascript"></script>
-   
-        <!-- No está el script
-        <script>
-            $(document).ready(function () {
-                // Javascript method's body can be found in assets/js/demos.js
-                demo.initDashboardPageCharts();
-
-            });
-        </script>
-        -->
-
-        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-        <script>
-            window.TrackJS &&
-                    TrackJS.install({
-                        token: "ee6fab19c5a04ac1a32a645abde4613a",
-                        application: "black-dashboard-free"
-                    });
-        </script>
-
-        <!--  Firebase plugin, files  -->
-        <script src="assets/js/plugins/chartjs.min.js"></script>
-        <!--  Notifications Plugin    -->
+        <!--  Notify    -->
         <script src="assets/js/plugins/bootstrap-notify.js"></script>
         <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
-        <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-        <script src="notificaciones.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-
-        <script>
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            var firebaseConfig = {
-                apiKey: "AIzaSyDSaJQjVoC68qsMv36zikiyXST4_dyXGPA",
-                authDomain: "i-iot-b1e3d.firebaseapp.com",
-                projectId: "i-iot-b1e3d",
-                storageBucket: "i-iot-b1e3d.appspot.com",
-                messagingSenderId: "914861533746",
-                appId: "1:914861533746:web:3db15ad941478bcb8b6a2b",
-                measurementId: "G-W8VD8H258M"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            firebase.analytics();
-            const auth = firebase.auth();
-            const fs = firebase.firestore();
-        </script>
+         <!-- Demo custom -->
+        <script src="assets/demo/demo.js"></script>
+        <script src="assets/demo/background_behaviour.js" type="text/javascript"></script>
+        <!-- Gauge Charts -->
+        <script src="assets/local/js/amcharts_core.js" type="text/javascript"></script>
+        <script src="assets/local/js/amcharts_charts.js" type="text/javascript"></script>
+        <script src="assets/gauges/guages_fill.js" type="text/javascript"></script>
+        <script src="assets/local/js/trackjs_agent.js" type="text/javascript"></script>
+        <script src="assets/js/plugins/chartjs.min.js"></script>
+        <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="assets/js/black-dashboard.min.js?v=1.0.0"></script>
+        <!--  Notifications Plugin    -->
+         <script src="assets/js/plugins/bootstrap-notify.js"></script>
+        <script src="assets/demo/notificaciones.js" type="text/javascript"></script>
+        <!-- Firebase -->
+        <script src="assets/firebase/firebase_app.js" type="text/javascript"></script>
+        <script src="assets/firebase/firebase_analytics.js" type="text/javascript"></script>
+        <script src="assets/firebase/firebase_auth.js" type="text/javascript"></script>
+        <script src="assets/firebase/firebase_firestore.js" type="text/javascript"></script>
+        <script src="assets/firebase/firebase_login.js" type="text/javascript"></script>
+   
     </body>
 
 </html>

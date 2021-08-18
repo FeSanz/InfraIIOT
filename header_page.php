@@ -15,19 +15,18 @@
             Infra IIoT
         </title>
         <!--     Fonts and icons     -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+        <link href="assets/local/css/fonts_google.css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" type="text/css"/>
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <!--  Icons -->
         <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <!-- Dashboards Style -->
-        <link href="assets/demo/demo.css" rel="stylesheet" />
+        <link href="assets/css/demo.css" rel="stylesheet" />
          <!-- Alertify CSS-->
         <link href="assets/alertify/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css"/>
          <!-- JQuery CSS-->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        <link href="assets/local/css/jquery_ui.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body class="">

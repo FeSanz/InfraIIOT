@@ -5,7 +5,7 @@
 // define('DB_NAME', 'VEEUbbBt3r');
  
  define('DB_HOST', 'localhost');
- define('DB_USER', 'root');
- define('DB_PASS', '');
+ define('DB_USER', 'spaceuser');
+ define('DB_PASS', 'condor');
  define('DB_NAME', 'infra');
 
