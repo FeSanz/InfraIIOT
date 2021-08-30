@@ -1,5 +1,6 @@
 //type = ['primary', 'info', 'success', 'warning', 'danger'];
 const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
+var idEquipSelected = 1;
 
 $(document).ready(function () {
     var today = new Date();
@@ -19,7 +20,7 @@ $(document).ready(function () {
     }
 
     //Para obtener los datos de la página actual solamente
-    if (getNameURLWeb() == "incidents_view.php")
+    if (getNameURLWeb() === "incidents_view.php")
     {
         const startDateInput = document.getElementById('startDateValue');
         const endDateInput = document.getElementById('endDateValue');
@@ -35,7 +36,7 @@ $(document).ready(function () {
         ajaxIncidentOperation(firstDataDB, today);
     }
 
-    if (getNameURLWeb() == "product_view.php")
+    if (getNameURLWeb() === "product_view.php")
     {
          const startDateInput = document.getElementById('startDateValue');
          const endDateInput = document.getElementById('endDateValue');
@@ -47,11 +48,12 @@ $(document).ready(function () {
         document.getElementById("endDateValue").value = today;
         
         MonthValue(firstDataDB, today);
-        ajaxFillOperation(firstDataDB, today);
+        ajaxFillOperation(firstDataDB, today, idEquipSelected);
     }
 
 });
 
+//Funcion para verificar notofocaciones
 $(document).ready(function () {
     GetNotifications();
     setInterval(function(){
@@ -59,10 +61,10 @@ $(document).ready(function () {
     },5000);
 });
 
+//Button - Función para filtrar llenados por fechas
 $(document).ready(function ()
 {
-	 if(sessionStorage.getItem('User')==""){
-        
+    if(sessionStorage.getItem('User')===""){
         location.href = 'index.html';
         return;
     }
@@ -79,7 +81,7 @@ $(document).ready(function ()
             } else
             {
                 MonthValue(startDateValue, endDateValue);
-                ajaxFillOperation(startDateValue, endDateValue);
+                ajaxFillOperation(startDateValue, endDateValue, idEquipSelected);
             }
         }
         else
@@ -88,6 +90,35 @@ $(document).ready(function ()
         }
     });
 });
+
+//Seleccionar equipo para desplegar datos
+$("#eq01").click(function() {
+    idEquipSelected = 1;
+    ChangeEquipment(1);
+  });
+$("#eq02").click(function() {
+    idEquipSelected = 2;
+    ChangeEquipment(2);
+  });
+$("#eq03").click(function() {
+    idEquipSelected = 3;
+    ChangeEquipment(3);
+  });
+$("#eq04").click(function() {
+    idEquipSelected = 4;
+    ChangeEquipment(4);
+  });
+$("#eq05").click(function() {
+    idEquipSelected = 5;
+   ChangeEquipment(5);
+  });
+  
+  function ChangeEquipment(idSelected)
+  {
+    document.getElementById("equipName").innerHTML = "Equipo " + idSelected;
+    alertify.success("Equipo " + idSelected );
+  }
+
 
 /*Obtiene el intervalo de meses consultados*/
 function MonthValue(startDate, endDate)
@@ -103,7 +134,6 @@ function MonthValue(startDate, endDate)
 }
 
 /* Valida que solo se escriban numeros y "-" en los campos de fecha*/
-
 function validateKeypress() {
     /*
         var alpha = /[ A-Za-z]/;
@@ -115,8 +145,7 @@ function validateKeypress() {
     return dateKey.test(keyChar) ? keyChar : false;
 }
 
-/* True -> Si la fecha tiene el formato adecuado yyyy-mm-dd
- * False -> Si la fecha esta escrita mal*/
+/* True -> Si la fecha tiene el formato adecuado yyyy-mm-dd || False -> Si la fecha esta escrita mal*/
 function isValidDate(dateString)
 {
   var regEx = /^\d{4}-\d{2}-\d{2}$/;
@@ -133,6 +162,7 @@ function isValidDate(dateString)
   return d.toISOString().slice(0,10) === dateString;
 }
 
+//Button - Función para filtrar alarmas por fecha
 $(document).ready(function ()
 {
     $("#search_alarms_button").click(function ()
@@ -318,13 +348,13 @@ gradientDoughnut = {
 };
 
 
-function ajaxFillOperation(startDay, endDay)
+function ajaxFillOperation(startDay, endDay, idEquipo)
 {                
     jQuery.ajax({
         type: "GET",
         url: 'api_fills.php',
         dataType: 'json',
-        data: {api_fills: 'get_fill_interval', startDate: startDay, endDate: endDay},
+        data: {api_fills: 'get_fill_interval', startDate: startDay, endDate: endDay, idEquipo: idEquipo},
         success: function (obj)
         {
             if (!obj.error && jQuery.isEmptyObject(obj.fillsInterval))
@@ -399,21 +429,14 @@ function ajaxFillOperation(startDay, endDay)
                 document.getElementById("minPressure").innerHTML = "Min. " + Math.min.apply(Math, presionMaxMin);
                 document.getElementById("minPercentage").innerHTML = "Min. " + Math.min.apply(Math, percentageMaxMin);
                 
-                document.getElementById("maxTemperature").innerHTML = "Max. " + Math.max.apply(Math, temperatureMaxMin);
-                document.getElementById("maxPressure").innerHTML = "Max. " + Math.max.apply(Math, presionMaxMin);
-                document.getElementById("maxPercentage").innerHTML = "Max. " + Math.max.apply(Math, percentageMaxMin);
-//                var chart_labels = [];
-//                var chart_data = [];
-//               for (var i = 0; i < 65; i++)
-//               {
-//                   chart_labels.push('lavel' + i);
-//                   chart_data.push(Math.floor(Math.random() * 100));
-//               }
+                document.getElementById("maxTemperature").innerHTML = "Máx. " + Math.max.apply(Math, temperatureMaxMin);
+                document.getElementById("maxPressure").innerHTML = "Máx. " + Math.max.apply(Math, presionMaxMin);
+                document.getElementById("maxPercentage").innerHTML = "Máx. " + Math.max.apply(Math, percentageMaxMin);
                
                 //***********Char temperatura******************
-                var ctx = document.getElementById("chartBigTemperature").getContext('2d');
+                var ctxTemperature = document.getElementById("chartBigTemperature").getContext('2d');
 
-                var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+                var gradientStroke = ctxTemperature.createLinearGradient(0, 230, 0, 50);
 
                 gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
                 gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
@@ -440,7 +463,7 @@ function ajaxFillOperation(startDay, endDay)
                     }]
                   };
                 
-                 var myChart = new Chart(ctx, {
+                 var temperatureChart = new Chart(ctxTemperature, {
                     type: 'line',
                      scrollablePlotArea: {
                         minWidth: 1200,
@@ -449,14 +472,12 @@ function ajaxFillOperation(startDay, endDay)
                     data: data,
                     options: gradientChartTemperature
                 });
-                //myChart.responsive.enabled = true;
-                
-                  
+               
                 
                 //***********Char presión******************
-                var ctx = document.getElementById("chartBigPressure").getContext('2d');
+                var ctxPressure = document.getElementById("chartBigPressure").getContext('2d');
 
-                var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+                var gradientStroke = ctxPressure.createLinearGradient(0, 230, 0, 50);
 
                 gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
                 gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
@@ -483,16 +504,16 @@ function ajaxFillOperation(startDay, endDay)
                     }]
                   };
                 
-                 var myChart = new Chart(ctx, {
+                 var pressureChart = new Chart(ctxPressure, {
                     type: 'line',
                     data: data,
                     options: gradientChartPressure
                 });
                 
                  //***********Char porcentaje******************
-                var ctx = document.getElementById("chartBigPercentage").getContext('2d');
+                var ctxPercentage = document.getElementById("chartBigPercentage").getContext('2d');
 
-                var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+                var gradientStroke = ctxPercentage.createLinearGradient(0, 230, 0, 50);
 
                 gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
                 gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
@@ -519,12 +540,15 @@ function ajaxFillOperation(startDay, endDay)
                     }]
                   };
                 
-                 var myChart = new Chart(ctx, {
+                 var percentageChart = new Chart(ctxPercentage, {
                     type: 'line',
                     data: data,
                     options: gradientChartPercentage
                 });
                 
+                temperatureChart.update();
+                pressureChart.update();
+                percentageChart.update();
             }
         }
     });

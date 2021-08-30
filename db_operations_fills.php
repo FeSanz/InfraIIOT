@@ -11,7 +11,7 @@ class OperationsFills
         $this->con = $db->connect();
     }
  
-    function getFillInterval($startDate, $endDate)
+    function getFillInterval($startDate, $endDate, $id_equipo)
     {
        //intervalo de fechas temporales        
        $sqlFill = $this->con->prepare("
@@ -21,7 +21,7 @@ class OperationsFills
            AND llenados.equipo=equipos.id 
            AND llenados.operador=operadores.id 
            AND llenados.fecha 
-           BETWEEN '".$startDate." 00:00:01' AND '". $endDate." 23:59:59'");
+           BETWEEN '".$startDate." 00:00:01' AND '". $endDate." 23:59:59' AND equipos.id =".$id_equipo);
        $sqlFill->execute();
        $sqlFill->bind_result($id, $fecha, $porcentaje, $presion, $temperatura, $cilindroTipo, $equipoNombre, $operadorNombre);
 
@@ -45,11 +45,12 @@ class OperationsFills
        return $fill_json; 
     }
     
-    function getCurrentFill()
+    function getCurrentFill($id_equipo)
     {        
-       $sqlCurrentFill = $this->con->prepare("SELECT temperatura, presion, porcentaje 
-                                                FROM llenados 
-                                                WHERE id= (SELECT MAX(id) AS id FROM llenados)");
+       $sqlCurrentFill = $this->con->prepare("SELECT llenados.temperatura, llenados.presion, llenados.porcentaje
+                                                FROM llenados, equipos 
+                                                WHERE llenados.equipo=equipos.id 
+                                                AND llenados.id= (SELECT MAX(id) FROM (SELECT * FROM llenados WHERE equipo = ".$id_equipo.") llenados)");
        $sqlCurrentFill->execute();
        $sqlCurrentFill->bind_result($temperature, $presion, $percentage);
 

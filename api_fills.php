@@ -34,7 +34,7 @@ if (isset($_GET['api_fills']))
             $db = new OperationsFills();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
-            $response['fillsInterval'] = $db->getFillInterval($_GET['startDate'], $_GET['endDate']);
+            $response['fillsInterval'] = $db->getFillInterval($_GET['startDate'], $_GET['endDate'], $_GET['idEquipo']);
         break;
     
          #Obtiene la temperatura, presion y llenado en tiempo real
@@ -42,7 +42,7 @@ if (isset($_GET['api_fills']))
             $db = new OperationsFills();
             $response['error'] = false;
             $response['message'] = 'Solicitud completada exitosamente';
-            $response['currentFill'] = $db->getCurrentFill();
+            $response['currentFill'] = $db->getCurrentFill($_GET['idEquipo']);
         break;
         
         /*

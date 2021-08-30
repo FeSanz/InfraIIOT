@@ -97,7 +97,7 @@
                                 <li class="dropdown nav-item">
                                     <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                         <div class="notification d-none d-lg-block d-xl-block"></div>
-                                        <i class="tim-icons icon-sound-wave"></i>
+                                        <i class="tim-icons icon-bell-55"></i>
                                         <div class="badge1" id="numAlerts">0</div>
                                         <p class="d-lg-none">
                                             Notificaciones

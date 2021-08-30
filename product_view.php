@@ -3,7 +3,35 @@
 <!-- Conetenido Dashboards -->
 <div class="content">
     <div class="row">
+
         <div class="col-12">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                        <label class="btn btn-sm btn-primary btn-simple active">
+                            <input type="radio" name="options" checked>
+                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq01">O1</span>                                           
+                        </label>
+                        <label class="btn btn-sm btn-primary btn-simple">
+                            <input type="radio" class="d-none d-sm-none" name="options">
+                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq02">O2</span>
+                        </label>
+                        <label class="btn btn-sm btn-primary btn-simple">
+                            <input type="radio" class="d-none d-sm-none" name="options">
+                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq03">O3</span>
+                        </label>
+                        <label class="btn btn-sm btn-primary btn-simple">
+                            <input type="radio" class="d-none d-sm-none" name="options">
+                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq04">O4</span>
+                        </label>
+                        <label class="btn btn-sm btn-primary btn-simple">
+                            <input type="radio" class="d-none d-sm-none" name="options">
+                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq05">O5</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
 
             <!-- Guages -->
             <div class="card">
@@ -13,6 +41,10 @@
                         <div class="row">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="tim-icons icon-chart-bar-32 text-primary"></i> Estado actual</h3>
+                            </div>
+                            <div class="dropdown">
+                                <div class="card-category" id="equipName">Equipo 1</div>
+                                <div class="card-category" id="message"></div>
                             </div>
                         </div>
                     </div>
@@ -84,21 +116,13 @@
                         <div class="card-header ">
                             <div class="row">
                                 <div class="col-sm-6 text-left">
-                                    <h5 class="card-category" id="dateSelectedTemp"></h5>
                                     <h4 class="card-title">Temperatura</h4>
+                                    <h5 class="card-category" id="dateSelectedTemp"></h5>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                        <label class="btn btn-sm btn-primary btn-simple">
-                                            <input type="radio" name="options" checked>
-                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="minTemperature"></span>                                           
-                                        </label>
-                                        <label class="btn btn-sm btn-primary btn-simple">
-                                            <input type="radio" class="d-none d-sm-none" name="options">
-                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="maxTemperature"></span>
-                                        </label>
-                                    </div>
-                                </div>
+                                <div class="dropdown">
+                                    <div class="card-category" id="minTemperature"></div>
+                                    <div class="card-category" id="maxTemperature"></div>
+                                </div> 
                             </div>
                         </div>
                         <div class="card-body">
@@ -117,20 +141,12 @@
                         <div class="card-header ">
                             <div class="row">
                                 <div class="col-sm-6 text-left">
-                                    <h5 class="card-category" id="dateSelectedPres"></h5>
                                     <h4 class="card-title">Presion</h4>
+                                    <h5 class="card-category" id="dateSelectedPres"></h5>
                                 </div>
-                                 <div class="col-sm-6">
-                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                        <label class="btn btn-sm btn-primary btn-simple">
-                                            <input type="radio" name="options" checked>
-                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="minPressure"></span>
-                                        </label>
-                                        <label class="btn btn-sm btn-primary btn-simple">
-                                            <input type="radio" class="d-none d-sm-none" name="options">
-                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="maxPressure"></span>
-                                        </label>
-                                    </div>
+                                <div class="dropdown">
+                                    <div class="card-category" id="minPressure"></div>
+                                    <div class="card-category" id="maxPressure"></div>
                                 </div>
                             </div>
                         </div>
@@ -150,20 +166,12 @@
                         <div class="card-header ">
                             <div class="row">
                                 <div class="col-sm-6 text-left">
+                                    <h4 class="card-title">Porcentaje</h4> 
                                     <h5 class="card-category" id="dateSelectedPer"></h5>
-                                    <h4 class="card-title">Porcentaje</h4>
                                 </div>
-                                    <div class="col-sm-6">
-                                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                        <label class="btn btn-sm btn-primary btn-simple">
-                                            <input type="radio" name="options" checked>
-                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="minPercentage"></span>
-                                        </label>
-                                        <label class="btn btn-sm btn-primary btn-simple">
-                                            <input type="radio" class="d-none d-sm-none" name="options">
-                                            <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="maxPercentage"></span>
-                                        </label>
-                                    </div>
+                                <div class="dropdown">
+                                    <div class="card-category" id="minPercentage"></div>
+                                    <div class="card-category" id="maxPercentage"></div>
                                 </div>
                             </div>
                         </div>
