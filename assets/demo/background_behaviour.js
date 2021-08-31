@@ -31,7 +31,7 @@
             $(this).addClass('active');
 
             var new_color = $(this).data('color');
-
+            alertify.success(" " + new_color.toString())
             if ($sidebar.length != 0) {
                 $sidebar.attr('data', new_color);
             }

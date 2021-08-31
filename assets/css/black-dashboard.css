@@ -33,7 +33,7 @@
   --gray-dark: #32325d;
   --light: #ced4da;
   --lighter: #e9ecef;
-  --primary: #e14eca;
+  --primary: #5e72e4; /**********************************/
   --secondary: #f4f5f7;
   --success: #00f2c3;
   --info: #1d8cf8;
@@ -4743,7 +4743,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: #ffffff;
-  background-color: #e14eca;
+  background-color: #5e72e4; /****************************/
 }
 
 .nav-fill .nav-item {
@@ -17337,11 +17337,11 @@ table.tablesorter thead tr .headerSortDown {
 
 .sidebar,
 .off-canvas-sidebar {
-  background: #ba54f5;
-  background: -webkit-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  background: -o-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  background: -moz-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  background: linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
+  background: #3358f4;
+  background: -webkit-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+  background: -o-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+  background: -moz-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+  background: linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
   height: calc(100vh - 90px);
   width: 230px;
   position: fixed;
