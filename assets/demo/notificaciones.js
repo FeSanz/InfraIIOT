@@ -40,7 +40,7 @@ function GetAllNotifications(){
                    '\''+data.notification[n].fecha+'\','+
                    '\''+data.notification[n].nombreEquipo+'\','+
                    ')">' + 
-                data.notification[n].alarmaTipo + '</a><span class="badge badge-danger badge-pill">new</span>';
+                data.notification[n].alarmaTipo + ' | ' + data.notification[n].nombreEquipo+'</a><span class="badge badge-danger badge-pill">new</span>';
                 lista.appendChild(mensaje);
             }
         },
