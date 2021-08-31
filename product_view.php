@@ -9,23 +9,23 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                        <label class="btn btn-sm btn-primary btn-simple active">
+                        <label class="btn btn-sm btn-warning btn-simple active">
                             <input type="radio" name="options" checked>
                             <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq01">O1</span>                                           
                         </label>
-                        <label class="btn btn-sm btn-primary btn-simple">
+                        <label class="btn btn-sm btn-warning btn-simple">
                             <input type="radio" class="d-none d-sm-none" name="options">
                             <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq02">O2</span>
                         </label>
-                        <label class="btn btn-sm btn-primary btn-simple">
+                        <label class="btn btn-sm btn-warning btn-simple">
                             <input type="radio" class="d-none d-sm-none" name="options">
                             <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq03">O3</span>
                         </label>
-                        <label class="btn btn-sm btn-primary btn-simple">
+                        <label class="btn btn-sm btn-warning btn-simple">
                             <input type="radio" class="d-none d-sm-none" name="options">
                             <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq04">O4</span>
                         </label>
-                        <label class="btn btn-sm btn-primary btn-simple">
+                        <label class="btn btn-sm btn-warning btn-simple">
                             <input type="radio" class="d-none d-sm-none" name="options">
                             <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" id="eq05">O5</span>
                         </label>
