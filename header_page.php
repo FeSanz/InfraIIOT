@@ -57,12 +57,6 @@
                                 <p>Incidencias</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="tim-icons icon-tablet-2"></i>
-                                <p>Llenado</p>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>

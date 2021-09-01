@@ -69,6 +69,7 @@ function buildGauges(temperature, pressure, percentage)
 
     var label = pieSeries.createChild(am4core.Label);
     label.text = temperature.toString() + " °C";
+    label.fill = "#7d7d7d";
     label.horizontalCenter = "middle";
     label.verticalCenter = "middle";
     label.fontSize = 20;
@@ -101,7 +102,7 @@ function buildGauges(temperature, pressure, percentage)
 
     var label = pieSeries.createChild(am4core.Label);
     label.text = pressure.toString() + " PSI";
-    ;
+    label.fill = "#7d7d7d";
     label.horizontalCenter = "middle";
     label.verticalCenter = "middle";
     label.fontSize = 20;
@@ -134,6 +135,7 @@ function buildGauges(temperature, pressure, percentage)
 
     var label = pieSeries.createChild(am4core.Label);
     label.text = percentage.toString() + " %";
+    label.fill = "#7d7d7d";
     label.horizontalCenter = "middle";
     label.verticalCenter = "middle";
     label.fontSize = 20;

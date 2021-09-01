@@ -29,7 +29,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <br>
-                                    <button type="button" id="search_alarms_button" class="btn btn-fill btn-primary">Buscar</button> 
+                                    <button type="button" id="search_alarms_button" class="btn btn-fill btn-success">Buscar</button>
                                 </div>
                             </div>
                         </div>
