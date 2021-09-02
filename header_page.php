@@ -25,13 +25,12 @@
          <!-- Alertify CSS-->
         <link href="assets/alertify/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/alertify/css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <script src="assets/alertify/sweetalert2.all.js" type="text/javascript"></script>
          <!-- JQuery CSS-->
         <link href="assets/local/css/jquery_ui.css" rel="stylesheet" type="text/css"/>
         <!-- Fusion Charts CSS-->
         <script src="assets/fusion/js/fusioncharts.js" type="text/javascript"></script>
         <script src="assets/fusion/js/themes/fusioncharts.theme.fusion.js" type="text/javascript"></script>
-        <!-- <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>-->
     </head>
 
     <body class="">

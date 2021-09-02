@@ -62,22 +62,27 @@ $(document).ready(function () {
 //Seleccionar equipo para desplegar datos
 $("#eq01").click(function() {
     idEquipSelected = 1;
+    alert("Se mostrarán solo datos del EQUIPO " + idEquipSelected);
     ChangeEquipment(1);
   });
 $("#eq02").click(function() {
     idEquipSelected = 2;
+    alert("Se mostrarán solo datos del EQUIPO " + idEquipSelected);
     ChangeEquipment(2);
   });
 $("#eq03").click(function() {
     idEquipSelected = 3;
+    alert("Se mostrarán solo datos del EQUIPO " + idEquipSelected);
     ChangeEquipment(3);
   });
 $("#eq04").click(function() {
     idEquipSelected = 4;
+    alert("Se mostrarán solo datos del EQUIPO " + idEquipSelected);
     ChangeEquipment(4);
   });
 $("#eq05").click(function() {
     idEquipSelected = 5;
+    alert("Se mostrarán solo datos del EQUIPO " + idEquipSelected);
    ChangeEquipment(5);
   });
   
@@ -89,8 +94,7 @@ function ChangeEquipment(idSelected)
     document.getElementById("equipNamePres").innerHTML = " &nbsp;&nbsp;&nbsp;►&nbsp;Equipo " + idSelected;
     document.getElementById("equipNamePerc").innerHTML = " &nbsp;&nbsp;&nbsp;►&nbsp;Equipo " + idSelected;
     //para chart con promedio
-    document.getElementById("equipNameAver").innerHTML = "Equipo " + idSelected;
-    alertify.success("Equipo " + idSelected );
+    document.getElementById("equipNameAver").innerHTML = "Equipo " + idSelected; 
 }
 
 /*Obtiene el intervalo de meses consultados*/
