@@ -43,7 +43,7 @@
                                 <h3 class="card-title"><i class="tim-icons icon-chart-bar-32 text-primary"></i> Estado actual</h3>
                             </div>
                             <div class="dropdown">
-                                <div class="card-category" id="equipName">Equipo 1</div>
+                                <div class="card-category" id="equipNameGauge">Equipo 1</div>
                                 <div class="card-category" id="message"></div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- TEMPERATURA - Fusion dash -->
             <div class="row">
                 <div class="col-12">
@@ -128,23 +128,28 @@
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <h4 class="card-title">Temperatura</h4>
-                                        <h5 class="card-category">1 de sepriembre 2021</h5>
+                                        <h4 class="title d-inline">Temperatura</h4>
+                                        <p class="card-category d-inline" id="equipNameTemp">
+                                            &nbsp;&nbsp;&nbsp;►&nbsp;Equipo 1
+                                        </p>
+                                        <h5 class="card-category" id="daySelectedTemp"></h5>
                                     </div>
                                     <div class="dropdown">
-                                        <div class="card-category">Min.</div>
-                                        <div class="card-category">Max.</div>
-                                    </div> 
+                                        <div class="card-category" id="minTemperature"></div>
+                                        <div class="card-category" id="maxTemperature"></div>
+                                    </div>  
                                 </div>
                             </div>
                             <div class="chart-area">
-                                <div id="fusionchart-temperature">    No se encontraron registros de temperatura, seleccione otra fecha</div>
+                                <div id="fusionchart-temperature">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    No se encontraron registros de temperatura, seleccione otra fecha
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- PRESION - Fusion dash -->
             <div class="row">
                 <div class="col-12">
@@ -153,23 +158,28 @@
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <h4 class="card-title">Presión</h4>
-                                        <h5 class="card-category">1 de sepriembre 2021</h5>
+                                        <h4 class="title d-inline">Presión</h4>
+                                        <p class="card-category d-inline" id="equipNamePres">
+                                            &nbsp;&nbsp;&nbsp;►&nbsp;Equipo 1
+                                        </p>
+                                        <h5 class="card-category" id="daySelectedPres"></h5>
                                     </div>
                                     <div class="dropdown">
-                                        <div class="card-category">Min.</div>
-                                        <div class="card-category">Max.</div>
-                                    </div> 
+                                        <div class="card-category" id="minPressure"></div>
+                                        <div class="card-category" id="maxPressure"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="chart-area">
-                                <div id="fusionchart-pressure">    No se encontraron registros de presión, seleccione otra fecha</div>
+                                <div id="fusionchart-pressure">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    No se encontraron registros de presión, seleccione otra fecha
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- PORCENTAJE - Fusion dash -->
             <div class="row">
                 <div class="col-12">
@@ -178,23 +188,28 @@
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <h4 class="card-title">Porcentaje</h4>
-                                        <h5 class="card-category">1 de sepriembre 2021</h5>
+                                        <h4 class="title d-inline">Porcentaje</h4>
+                                        <p class="card-category d-inline" id="equipNamePerc">
+                                            &nbsp;&nbsp;&nbsp;►&nbsp;Equipo 1
+                                        </p>
+                                        <h5 class="card-category" id="daySelectedPerc"></h5>
                                     </div>
                                     <div class="dropdown">
-                                        <div class="card-category">Min.</div>
-                                        <div class="card-category">Max.</div>
+                                        <div class="card-category" id="minPercentage"></div>
+                                        <div class="card-category" id="maxPercentage"></div>
                                     </div> 
                                 </div>
                             </div>
                             <div class="chart-area">
-                                <div id="fusionchart-percentage">    No se encontraron registros de porcentajes, seleccione otra fecha</div>
+                                <div id="fusionchart-percentage">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    No se encontraron registros de porcentajes, seleccione otra fecha
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
 
             <!-- Formulario para promedio -->
             <div class="row">
@@ -243,81 +258,32 @@
                 </div>
             </div>
 
-
-            <!-- Tempratura dash -->
+            <!-- PROMEDIO TEMPERATURA PRESION PORCENTAJE FUSION DASH -->
             <div class="row">
                 <div class="col-12">
                     <div class="card card-chart">
-                        <div class="card-header ">
-                            <div class="row">
-                                <div class="col-sm-6 text-left">
-                                    <h4 class="card-title">Temperatura</h4>
-                                    <h5 class="card-category" id="dateSelectedTemp"></h5>
-                                </div>
-                                <div class="dropdown">
-                                    <div class="card-category" id="minTemperature"></div>
-                                    <div class="card-category" id="maxTemperature"></div>
-                                </div> 
-                            </div>
-                        </div>
                         <div class="card-body">
+                            <div class="card-header ">
+                                <div class="row">
+                                    <div class="col-sm-6 text-left">
+                                        <h4 class="title d-inline">Promedio de llenados</h4>
+                                        <h5 class="card-category" id="daySelectedAverage"></h5>
+                                    </div>
+                                    <div class="dropdown">
+                                        <div class="card-category" id="equipNameAver">Equipo 1</div>
+                                    </div> 
+                                </div>
+                            </div>
                             <div class="chart-area">
-                                <canvas id="chartBigTemperature"></canvas>
+                                <div id="fusionchart-average">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    No se encontraron registros, seleccione otra fecha
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Presión dash -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-chart">
-                        <div class="card-header ">
-                            <div class="row">
-                                <div class="col-sm-6 text-left">
-                                    <h4 class="card-title">Presion</h4>
-                                    <h5 class="card-category" id="dateSelectedPres"></h5>
-                                </div>
-                                <div class="dropdown">
-                                    <div class="card-category" id="minPressure"></div>
-                                    <div class="card-category" id="maxPressure"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="chartBigPressure"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Porcentage dash -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-chart">
-                        <div class="card-header ">
-                            <div class="row">
-                                <div class="col-sm-6 text-left">
-                                    <h4 class="card-title">Porcentaje</h4> 
-                                    <h5 class="card-category" id="dateSelectedPer"></h5>
-                                </div>
-                                <div class="dropdown">
-                                    <div class="card-category" id="minPercentage"></div>
-                                    <div class="card-category" id="maxPercentage"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="chartBigPercentage"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>

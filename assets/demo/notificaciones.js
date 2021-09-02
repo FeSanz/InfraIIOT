@@ -39,8 +39,8 @@ function GetAllNotifications(){
                    '\''+data.notification[n].alarmaTipo+'\','+
                    '\''+data.notification[n].fecha+'\','+
                    '\''+data.notification[n].nombreEquipo+'\','+
-                   ')">' + 
-                data.notification[n].alarmaTipo + ' | ' + data.notification[n].nombreEquipo + '</a><span class="badge badge-danger badge-pill">new</span>';
+                   ')"> ► <b>' + 
+                data.notification[n].nombreEquipo + '</b> → ' + data.notification[n].alarmaTipo + '</a><span class="badge badge-danger badge-pill">Pendiente</span>';
                 lista.appendChild(mensaje);
             }
         },

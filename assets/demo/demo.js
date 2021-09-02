@@ -1,17 +1,11 @@
-//type = ['primary', 'info', 'success', 'warning', 'danger'];
 const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
 var idEquipSelected = 1;
 
 $(document).ready(function () {
-    var today = new Date();
-
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    //Para obtener los datos del mes actual solamente
-    today = yyyy + '-' + mm + '-' + dd;
-    var firstDataDB = yyyy + '-' + mm + '-' + '01';
+    var dt = new Date();
+    
+    var firstDataDB = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + '01';
+    var today = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getUTCDate()).padStart(2, '0');;
 
     function getNameURLWeb(){
         var sPath = window.location.pathname;
@@ -49,7 +43,8 @@ $(document).ready(function () {
         document.getElementById("endDateValue").value = today;
         document.getElementById("dayValue").value = today;
         
-        MonthValue(firstDataDB, today);
+        DayParse(today);
+        IntervalDatesParse(firstDataDB, today);
         ajaxFillOperation(firstDataDB, today, idEquipSelected);
         fillsDay(today, idEquipSelected);
     }
@@ -88,21 +83,30 @@ $("#eq05").click(function() {
   
 function ChangeEquipment(idSelected)
 {
-    document.getElementById("equipName").innerHTML = "Equipo " + idSelected;
+    document.getElementById("equipNameGauge").innerHTML = "Equipo " + idSelected;
+    //para charts por dia
+    document.getElementById("equipNameTemp").innerHTML = " &nbsp;&nbsp;&nbsp;►&nbsp;Equipo " + idSelected;
+    document.getElementById("equipNamePres").innerHTML = " &nbsp;&nbsp;&nbsp;►&nbsp;Equipo " + idSelected;
+    document.getElementById("equipNamePerc").innerHTML = " &nbsp;&nbsp;&nbsp;►&nbsp;Equipo " + idSelected;
+    //para chart con promedio
+    document.getElementById("equipNameAver").innerHTML = "Equipo " + idSelected;
     alertify.success("Equipo " + idSelected );
 }
 
 /*Obtiene el intervalo de meses consultados*/
-function MonthValue(startDate, endDate)
-{
-    var dateStart = new Date(startDate);
-    var dateEnd = new Date(endDate);
-    var monthNumberStart = dateStart.getMonth();
-    var monthNumberEnd = dateEnd.getMonth();
+function DayParse(day)
+{   
+    var options = {timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById("daySelectedTemp").innerHTML = new Date(day).toLocaleDateString("es-ES", options);
+    document.getElementById("daySelectedPres").innerHTML = new Date(day).toLocaleDateString("es-ES", options);
+    document.getElementById("daySelectedPerc").innerHTML = new Date(day).toLocaleDateString("es-ES", options);
+}
 
-    document.getElementById("dateSelectedTemp").innerHTML = months[monthNumberStart] + " - " + months[monthNumberEnd];
-    document.getElementById("dateSelectedPres").innerHTML = months[monthNumberStart] + " - " + months[monthNumberEnd];
-    document.getElementById("dateSelectedPer").innerHTML = months[monthNumberStart] + " - " + months[monthNumberEnd];
+function IntervalDatesParse(start, end)
+{
+    var options = {timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById("daySelectedAverage").innerHTML = new Date(start).toLocaleDateString("es-ES", options) + " a " +
+                                                                new Date(end).toLocaleDateString("es-ES", options);
 }
 
 /* Valida que solo se escriban numeros y "-" en los campos de fecha*/
@@ -154,7 +158,6 @@ $(document).ready(function ()
                 alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
             } else
             {
-                MonthValue(startDateValue, endDateValue);
                 ajaxFillOperation(startDateValue, endDateValue, idEquipSelected);
             }
         }
@@ -203,153 +206,6 @@ $(document).ready(function ()
     });
 });
 
-gradientChartTemperature = {
-    maintainAspectRatio: false,
-    legend: {
-        display: false
-    },
-
-    tooltips: {
-        backgroundColor: '#f5f5f5',
-        titleFontColor: '#333',
-        bodyFontColor: '#666',
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest"
-    },
-    responsive: true,
-    scales: {
-        yAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.0)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    suggestedMin: 10,
-                    suggestedMax: 60,
-                    padding: 20,
-                    fontColor: "#9a9a9a"
-                }
-            }],
-
-        xAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(225,78,202,0.1)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    display: false,
-                    padding: 10,
-                    fontColor: "#9a9a9a"
-                }
-            }]
-    }
-};
-
-gradientChartPressure = {
-    maintainAspectRatio: false,
-    legend: {
-        display: false
-    },
-
-    tooltips: {
-        backgroundColor: '#f5f5f5',
-        titleFontColor: '#333',
-        bodyFontColor: '#666',
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest"
-    },
-    responsive: true,
-    scales: {
-        yAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.0)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    suggestedMin: 10,
-                    suggestedMax: 3200,
-                    padding: 20,
-                    fontColor: "#2380f7"
-                }
-            }],
-
-        xAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.1)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    display: false,
-                    padding: 10,
-                    fontColor: "#2380f7"
-                }
-            }]
-    }
-};
-
-gradientChartPercentage = {
-    maintainAspectRatio: false,
-    legend: {
-        display: false
-    },
-
-    tooltips: {
-        backgroundColor: '#f5f5f5',
-        titleFontColor: '#333',
-        bodyFontColor: '#666',
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest"
-    },
-    responsive: true,
-    scales: {
-        yAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(29,140,248,0.0)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    suggestedMin: 10,
-                    suggestedMax: 100,
-                    padding: 20,
-                    fontColor: "#9e9e9e"
-                }
-            }],
-
-        xAxes: [{
-                barPercentage: 1.6,
-                gridLines: {
-                    drawBorder: false,
-                    color: 'rgba(0,242,195,0.1)',
-                    zeroLineColor: "transparent",
-                },
-                ticks: {
-                    display: false,
-                    padding: 10,
-                    fontColor: "#9e9e9e"
-                }
-            }]
-    }
-};
-
 gradientDoughnut = {
     responsive: true,
     plugins: {
@@ -363,7 +219,6 @@ gradientDoughnut = {
     }
 };
 
-
 function ajaxFillOperation(startDay, endDay, idEquipo)
 {                
     jQuery.ajax({
@@ -375,10 +230,12 @@ function ajaxFillOperation(startDay, endDay, idEquipo)
         {
             if (!obj.error && jQuery.isEmptyObject(obj.fillsInterval))
             {
-                alertify.error('Sin registros. Seleccione otra fecha');
+                alertify.error('Sin registros. Elija otras fechas');
 
             } else
             {
+                IntervalDatesParse(startDay, endDay);
+                 
                 var datesFills = [];
                 var temperatureFills = [];
                 var presionFills = [];
@@ -441,137 +298,14 @@ function ajaxFillOperation(startDay, endDay, idEquipo)
                     datesFills.push(dateSplit(obj.fillsInterval[obj.fillsInterval.length-1].fecha));
                 }
                 
-                document.getElementById("minTemperature").innerHTML = "Min. " + Math.min.apply(Math, temperatureMaxMin);
-                document.getElementById("minPressure").innerHTML = "Min. " + Math.min.apply(Math, presionMaxMin);
-                document.getElementById("minPercentage").innerHTML = "Min. " + Math.min.apply(Math, percentageMaxMin);
-                
-                document.getElementById("maxTemperature").innerHTML = "Máx. " + Math.max.apply(Math, temperatureMaxMin);
-                document.getElementById("maxPressure").innerHTML = "Máx. " + Math.max.apply(Math, presionMaxMin);
-                document.getElementById("maxPercentage").innerHTML = "Máx. " + Math.max.apply(Math, percentageMaxMin);
-               
-                //***********Char temperatura******************
-                var ctxTemperature = document.getElementById("chartBigTemperature").getContext('2d');
-
-                var gradientStroke = ctxTemperature.createLinearGradient(0, 230, 0, 50);
-
-                gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-                gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-                gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-                
-                var data = {
-                    labels: datesFills,
-                    datasets: [{
-                      label: "Temperatura",
-                      fill: true,
-                      backgroundColor: gradientStroke,
-                      borderColor: '#09a6ee',
-                      borderWidth: 2,
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      pointBackgroundColor: '#09a6ee',
-                      pointBorderColor: 'rgba(255,255,255,0)',
-                      pointHoverBackgroundColor: '#09a6ee',
-                      pointBorderWidth: 20,
-                      pointHoverRadius: 4,
-                      pointHoverBorderWidth: 15,
-                      pointRadius: 4,
-                      data: temperatureFills,
-                    }]
-                  };
-                
-                 var temperatureChart = new Chart(ctxTemperature, {
-                    type: 'line',
-                     scrollablePlotArea: {
-                        minWidth: 1200,
-                        scrollPositionX: 1
-                      },
-                    data: data,
-                    options: gradientChartTemperature
-                });
-               
-                
-                //***********Char presión******************
-                var ctxPressure = document.getElementById("chartBigPressure").getContext('2d');
-
-                var gradientStroke = ctxPressure.createLinearGradient(0, 230, 0, 50);
-
-                gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-                gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-                gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-                
-                var data = {
-                    labels: datesFills,
-                    datasets: [{
-                      label: "Presión",
-                      fill: true,
-                      backgroundColor: gradientStroke,
-                      borderColor: '#d346b1',
-                      borderWidth: 2,
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      pointBackgroundColor: '#d346b1',
-                      pointBorderColor: 'rgba(255,255,255,0)',
-                      pointHoverBackgroundColor: '#d346b1',
-                      pointBorderWidth: 20,
-                      pointHoverRadius: 4,
-                      pointHoverBorderWidth: 15,
-                      pointRadius: 4,
-                      data: presionFills,
-                    }]
-                  };
-                
-                 var pressureChart = new Chart(ctxPressure, {
-                    type: 'line',
-                    data: data,
-                    options: gradientChartPressure
-                });
-                
-                 //***********Char porcentaje******************
-                var ctxPercentage = document.getElementById("chartBigPercentage").getContext('2d');
-
-                var gradientStroke = ctxPercentage.createLinearGradient(0, 230, 0, 50);
-
-                gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-                gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-                gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-                
-                var data = {
-                    labels: datesFills,
-                    datasets: [{
-                      label: "Pocentaje",
-                      fill: true,
-                      backgroundColor: gradientStroke,
-                      borderColor: '#1be3c1',
-                      borderWidth: 2,
-                      borderDash: [],
-                      borderDashOffset: 0.0,
-                      pointBackgroundColor: '#1be3c1',
-                      pointBorderColor: 'rgba(255,255,255,0)',
-                      pointHoverBackgroundColor: '#1be3c1',
-                      pointBorderWidth: 20,
-                      pointHoverRadius: 4,
-                      pointHoverBorderWidth: 15,
-                      pointRadius: 4,
-                      data: percentageFills,
-                    }]
-                  };
-                
-                 var percentageChart = new Chart(ctxPercentage, {
-                    type: 'line',
-                    data: data,
-                    options: gradientChartPercentage
-                });
-                
-                temperatureChart.update();
-                pressureChart.update();
-                percentageChart.update();
+                chartFusionBarInterval(datesFills, temperatureFills, presionFills, percentageFills, 'fusionchart-average');
             }
         }
     });
 }
 
 function fillsDay(day, idEquipo)
-{                
+{
     jQuery.ajax({
         type: "GET",
         url: 'api_fills.php',
@@ -581,10 +315,11 @@ function fillsDay(day, idEquipo)
         {
             if (!obj.error && jQuery.isEmptyObject(obj.fillsInterval))
             {
-                alertify.error('Sin registros. Seleccione otra fecha');
-
-            } else
+                alertify.error('Sin registros en el día seleccionado. Elija otra fecha');
+            } 
+            else
             {
+                DayParse(day);
                 var datesFills = [];
                 var temperatureFills = [];
                 var presionFills = [];
@@ -594,19 +329,30 @@ function fillsDay(day, idEquipo)
                 for (i in obj.fillsInterval)
                 {
                     datesFills.push(obj.fillsInterval[i].fecha);
-                    percentageFills.push(obj.fillsInterval[i].porcentaje);
-                    presionFills.push(obj.fillsInterval[i].presion);
+                    
                     temperatureFills.push(obj.fillsInterval[i].temperatura);
+                    presionFills.push(obj.fillsInterval[i].presion);
+                    percentageFills.push(obj.fillsInterval[i].porcentaje);
                 }
                 
-                chartFusion(datesFills, temperatureFills, 'fusionchart-temperature', '#09a6ee');
-                chartFusion(datesFills, presionFills, 'fusionchart-pressure', '#d346b1');
-                chartFusion(datesFills, percentageFills, 'fusionchart-percentage', '#1be3c1');
+                document.getElementById("minTemperature").innerHTML = "Min. " + Math.min.apply(Math, temperatureFills);
+                document.getElementById("minPressure").innerHTML = "Min. " + Math.min.apply(Math, presionFills);
+                document.getElementById("minPercentage").innerHTML = "Min. " + Math.min.apply(Math, percentageFills);
+                
+                document.getElementById("maxTemperature").innerHTML = "Máx. " + Math.max.apply(Math, temperatureFills);
+                document.getElementById("maxPressure").innerHTML = "Máx. " + Math.max.apply(Math, presionFills);
+                document.getElementById("maxPercentage").innerHTML = "Máx. " + Math.max.apply(Math, percentageFills);
+               
+               
+                chartFusionLineDay(datesFills, temperatureFills, 'fusionchart-temperature', '#09a6ee');
+                chartFusionLineDay(datesFills, presionFills, 'fusionchart-pressure', '#d346b1');
+                chartFusionLineDay(datesFills, percentageFills, 'fusionchart-percentage', '#1be3c1');
             }
         }
     });
 }
-function chartFusion(labels, datafills, idHTML, linecolor)
+
+function chartFusionLineDay(labels, datafills, idHTML, linecolor)
 {
     var chart_labels = {category: []};
     var chart_data = {data: [] };
@@ -654,13 +400,57 @@ function chartFusion(labels, datafills, idHTML, linecolor)
     chartObj.render();
 }
 
+function chartFusionBarInterval(labels, temperature_data, pressure_data, percentage_data, idHTML)
+{
+    var chart_labels = {category: []};
+    var chart_data_temp = {seriesname: "Temperatura", data: [] };
+    var chart_data_pres = {seriesname: "Presión", data: [] };
+    var chart_data_perc = {seriesname: "Porcentaje", data: [] };
+
+    for (var i = 0; i < labels.length; i++)
+    {
+        chart_labels['category'].push({"label": labels[i].toString()});
+        chart_data_temp['data'].push({"value": temperature_data[i].toString()});
+        chart_data_pres['data'].push({"value": pressure_data[i].toString()});
+        chart_data_perc['data'].push({"value": percentage_data[i].toString()});
+    }
+
+    var categories = [chart_labels];
+    var dataset = [chart_data_temp, chart_data_pres, chart_data_perc];
+
+    var chartObj = new FusionCharts({
+        type: 'mscolumn2d',
+        dataFormat: 'json',
+        renderAt: idHTML,
+        width: '100%',
+        height: '70%',
+        dataSource: {
+            chart: {
+                theme: "fusion",
+                bgColor: "#272A3D",
+                scrollColor : "#6b6b6c",
+                baseFontColor: "#7d7d7d",
+                formatnumberscale: "1",
+                drawcrossline: "1",
+                flatScrollBars: "1",
+                scrollheight: "10",
+                numVisiblePlot: "12",
+                showHoverEffect: "1"
+            },
+            categories: categories,
+            dataset: dataset
+        }
+    });
+    chartObj.render();
+}
+
 function dateSplit(date)
 {
     var dateSplit = date.split(" ");
     return dateSplit[0];
 }
 
-
+var myChart;
 function ajaxIncidentOperation(startDay, endDay, idEquipo) {
     /* Llamada para obtener datos de alarmas por grupos (para grafica de dona) */
     jQuery.ajax({
