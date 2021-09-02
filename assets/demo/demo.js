@@ -47,9 +47,11 @@ $(document).ready(function () {
 
         document.getElementById("startDateValue").value = firstDataDB;
         document.getElementById("endDateValue").value = today;
+        document.getElementById("dayValue").value = today;
         
         MonthValue(firstDataDB, today);
         ajaxFillOperation(firstDataDB, today, idEquipSelected);
+        fillsDay(today, idEquipSelected);
     }
 
 });
@@ -140,6 +142,7 @@ $(document).ready(function ()
         return;
     }
     $(".loader").fadeOut("slow");
+    
     $("#search_fills_button").click(function ()
     {
         var startDateValue = $("#startDateValue").val();
@@ -154,6 +157,19 @@ $(document).ready(function ()
                 MonthValue(startDateValue, endDateValue);
                 ajaxFillOperation(startDateValue, endDateValue, idEquipSelected);
             }
+        }
+        else
+        {
+            alertify.error("Formato de fecha incorrecto. Verifique yyyy-mm-dd")
+        }
+    });
+    
+    $("#day_fills_button").click(function ()
+    {
+        var dayValue = $("#dayValue").val();
+        if (isValidDate(dayValue))
+        {
+            fillsDay(dayValue, idEquipSelected);
         }
         else
         {
@@ -554,13 +570,96 @@ function ajaxFillOperation(startDay, endDay, idEquipo)
     });
 }
 
+function fillsDay(day, idEquipo)
+{                
+    jQuery.ajax({
+        type: "GET",
+        url: 'api_fills.php',
+        dataType: 'json',
+        data: {api_fills: 'get_fill_interval', startDate: day, endDate: day, idEquipo: idEquipo},
+        success: function (obj)
+        {
+            if (!obj.error && jQuery.isEmptyObject(obj.fillsInterval))
+            {
+                alertify.error('Sin registros. Seleccione otra fecha');
+
+            } else
+            {
+                var datesFills = [];
+                var temperatureFills = [];
+                var presionFills = [];
+                var percentageFills = [];
+          
+                var i;
+                for (i in obj.fillsInterval)
+                {
+                    datesFills.push(obj.fillsInterval[i].fecha);
+                    percentageFills.push(obj.fillsInterval[i].porcentaje);
+                    presionFills.push(obj.fillsInterval[i].presion);
+                    temperatureFills.push(obj.fillsInterval[i].temperatura);
+                }
+                
+                chartFusion(datesFills, temperatureFills, 'fusionchart-temperature', '#09a6ee');
+                chartFusion(datesFills, presionFills, 'fusionchart-pressure', '#d346b1');
+                chartFusion(datesFills, percentageFills, 'fusionchart-percentage', '#1be3c1');
+            }
+        }
+    });
+}
+function chartFusion(labels, datafills, idHTML, linecolor)
+{
+    var chart_labels = {category: []};
+    var chart_data = {data: [] };
+
+    for (var i = 0; i < datafills.length; i++)
+    {
+        chart_labels['category'].push({"label": labels[i].toString()});
+        chart_data['data'].push({"value": datafills[i].toString()});
+    }
+
+    var categories = [chart_labels];
+    var dataset = [chart_data];
+
+    var chartObj = new FusionCharts({
+        type: 'scrollline2d',
+        dataFormat: 'json',
+        renderAt: idHTML,
+        width: '100%',
+        height: '70%',
+        dataSource: {
+            chart: {
+                theme: "fusion",
+                bgColor: "#272A3D",
+                scrollColor : "#6b6b6c",
+                divLineColor: "#7d7d7d",
+                baseFontColor: "#7d7d7d",
+                //bgAlpha: "0,0",
+                showLabels: "0",
+                //caption: "Temperarura",
+                //subCaption: "2021-05-09",
+                //xAxisName: "Month",
+                //yAxisName: "Revenue",
+                //numberPrefix: "$",
+                lineThickness: "3",
+                lineColor: linecolor,
+                flatScrollBars: "1",
+                scrollheight: "10",
+                numVisiblePlot: "12",
+                showHoverEffect: "1"
+            },
+            categories: categories,
+            dataset: dataset
+        }
+    });
+    chartObj.render();
+}
+
 function dateSplit(date)
 {
     var dateSplit = date.split(" ");
     return dateSplit[0];
 }
 
-var myChart;
 
 function ajaxIncidentOperation(startDay, endDay, idEquipo) {
     /* Llamada para obtener datos de alarmas por grupos (para grafica de dona) */
