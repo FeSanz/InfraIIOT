@@ -266,7 +266,7 @@
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <h4 class="title d-inline">Promedio de llenados</h4>
+                                        <h4 class="title d-inline">Promedio en llenados</h4>
                                         <h5 class="card-category" id="daySelectedAverage"></h5>
                                     </div>
                                     <div class="dropdown">
