@@ -11,16 +11,16 @@ class OperationsAlarms
         $this->con = $db->connect();
     }
  
-   function getAlarmList($startDate, $endDate)
+   function getAlarmList($startDate, $endDate, $idEquipo)
    {
       $AlarmsSQL = $this->con->prepare("
          SELECT alarmas.fecha, equipos.nombre, alarma_tipo.nombre 
          FROM alarmas, equipos, alarma_tipo 
          WHERE alarmas.equipo = equipos.id 
          AND alarmas.alarma_tipos = alarma_tipo.id 
-         AND alarmas.fecha 
-         BETWEEN '".$startDate." 00:00:01' AND '". $endDate." 23:59:59'
-         ORDER BY alarmas.fecha");
+         AND alarmas.fecha BETWEEN '".$startDate." 00:00:01' AND '". $endDate." 23:59:59'
+         AND equipos.id = ".$idEquipo.
+         " ORDER BY alarmas.fecha");
       $AlarmsSQL->execute();
       $AlarmsSQL->bind_result($fecha, $equiposNombre, $alarmasNombre);
 
@@ -39,61 +39,32 @@ class OperationsAlarms
       return $AlarmsJSON; 
    }
 
-   function getAlarmGroups($startDate, $endDate)
-    {       
-       $AlarmsSQL = $this->con->prepare("
-            SELECT alarma_tipo.nombre, count(alarma_tipo.nombre) total 
-            FROM alarmas, equipos, alarma_tipo 
-            WHERE alarmas.equipo = equipos.id 
-            AND alarmas.alarma_tipos = alarma_tipo.id 
-            AND alarmas.fecha BETWEEN '".$startDate." 00:00:01' AND '". $endDate." 23:59:59' 
-            GROUP BY alarma_tipo.nombre 
-         ");
+   function getAlarmGroups($startDate, $endDate, $idEquipo)
+   {       
+      $AlarmsSQL = $this->con->prepare("
+         SELECT alarma_tipo.nombre, count(alarma_tipo.nombre) total 
+         FROM alarmas, equipos, alarma_tipo 
+         WHERE alarmas.equipo = equipos.id 
+         AND alarmas.alarma_tipos = alarma_tipo.id 
+         AND alarmas.fecha BETWEEN '".$startDate." 00:00:01' AND '". $endDate." 23:59:59' 
+         AND equipos.id = ".$idEquipo.
+         " GROUP BY alarma_tipo.nombre 
+      ");
 
-       $AlarmsSQL->execute();
-       $AlarmsSQL->bind_result($nombre, $total);
+      $AlarmsSQL->execute();
+      $AlarmsSQL->bind_result($nombre, $total);
 
-       $AlarmsJSON = array(); 
+      $AlarmsJSON = array(); 
 
-       while($AlarmsSQL->fetch())
-       {
-          $AlarmsArray  = array();
-          $AlarmsArray['nombre'] = $nombre; 
-          $AlarmsArray['total'] = $total;
+      while($AlarmsSQL->fetch())
+      {
+         $AlarmsArray  = array();
+         $AlarmsArray['nombre'] = $nombre; 
+         $AlarmsArray['total'] = $total;
 
-          array_push($AlarmsJSON, $AlarmsArray); 
-       }
+         array_push($AlarmsJSON, $AlarmsArray); 
+      }
 
-       return $AlarmsJSON; 
-    }
-  
-    /*
-   function getDataNotifications()
-    {       
-       $sqlNotifications = $this->con->prepare("
-            SELECT alarmas.id, alarmas.fecha, equipos.nombre, alarma_tipo.nombre 
-            FROM alarmas, equipos, alarma_tipo 
-            WHERE alarmas.equipo = equipos.id 
-            AND alarmas.alarma_tipos = alarma_tipo.id 
-            AND alarmas.`status` = 1");
-       $sqlNotifications->execute();
-       $sqlNotifications->bind_result($id, $fecha, $nombreEquipo, $alarmaTipo);
-
-       $notifications_json = array(); 
-
-       while($sqlNotifications->fetch())
-       {
-          $notifications_array  = array();
-          $notifications_array['id'] = $id;  
-          $notifications_array['fecha'] = $fecha; 
-          $notifications_array['nombreEquipo'] = $nombreEquipo;
-          $notifications_array['alarmaTipo'] = $alarmaTipo; 
-
-
-          array_push($notifications_json, $notifications_array); 
-       }
-
-       return $notifications_json; 
-    }
-    */
+      return $AlarmsJSON; 
+   }
 }

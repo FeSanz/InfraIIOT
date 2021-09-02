@@ -22,6 +22,7 @@ $(document).ready(function () {
     //Para obtener los datos de la página actual solamente
     if (getNameURLWeb() === "incidents_view.php")
     {
+        //Obtenemos una referencia a los campos de fecha
         const startDateInput = document.getElementById('startDateValue');
         const endDateInput = document.getElementById('endDateValue');
          
@@ -33,7 +34,7 @@ $(document).ready(function () {
         document.getElementById("startDateValue").value = firstDataDB;
         document.getElementById("endDateValue").value = today;
         
-        ajaxIncidentOperation(firstDataDB, today);
+        ajaxIncidentOperation(firstDataDB, today, idEquipSelected);
     }
 
     if (getNameURLWeb() === "product_view.php")
@@ -46,11 +47,9 @@ $(document).ready(function () {
 
         document.getElementById("startDateValue").value = firstDataDB;
         document.getElementById("endDateValue").value = today;
-        document.getElementById("dayValue").value = today;
         
         MonthValue(firstDataDB, today);
         ajaxFillOperation(firstDataDB, today, idEquipSelected);
-        fillsDay(today, idEquipSelected);
     }
 
 });
@@ -61,50 +60,6 @@ $(document).ready(function () {
     setInterval(function(){
         GetNotifications();
     },5000);
-});
-
-//Button - Función para filtrar llenados por fechas
-$(document).ready(function ()
-{
-    if(sessionStorage.getItem('User')===""){
-        location.href = 'index.html';
-        return;
-    }
-    $(".loader").fadeOut("slow");
-    
-    $("#search_fills_button").click(function ()
-    {
-        var startDateValue = $("#startDateValue").val();
-        var endDateValue = $("#endDateValue").val();
-        if (isValidDate(startDateValue) && isValidDate(endDateValue))
-        {
-            var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
-            if (difference < 0) {
-                alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
-            } else
-            {
-                MonthValue(startDateValue, endDateValue);
-                ajaxFillOperation(startDateValue, endDateValue, idEquipSelected);
-            }
-        }
-        else
-        {
-            alertify.error("Formato de fecha incorrecto. Verifique yyyy-mm-dd")
-        }
-    });
-    
-    $("#day_fills_button").click(function ()
-    {
-        var dayValue = $("#dayValue").val();
-        if (isValidDate(dayValue))
-        {
-            fillsDay(dayValue, idEquipSelected);
-        }
-        else
-        {
-            alertify.error("Formato de fecha incorrecto. Verifique yyyy-mm-dd")
-        }
-    });
 });
 
 //Seleccionar equipo para desplegar datos
@@ -129,12 +84,11 @@ $("#eq05").click(function() {
    ChangeEquipment(5);
   });
   
-  function ChangeEquipment(idSelected)
-  {
+function ChangeEquipment(idSelected)
+{
     document.getElementById("equipName").innerHTML = "Equipo " + idSelected;
     alertify.success("Equipo " + idSelected );
-  }
-
+}
 
 /*Obtiene el intervalo de meses consultados*/
 function MonthValue(startDate, endDate)
@@ -178,6 +132,36 @@ function isValidDate(dateString)
   return d.toISOString().slice(0,10) === dateString;
 }
 
+//Button - Función para filtrar llenados por fechas
+$(document).ready(function ()
+{
+    if(sessionStorage.getItem('User')===""){
+        location.href = 'index.html';
+        return;
+    }
+    $(".loader").fadeOut("slow");
+    $("#search_fills_button").click(function ()
+    {
+        var startDateValue = $("#startDateValue").val();
+        var endDateValue = $("#endDateValue").val();
+        if (isValidDate(startDateValue) && isValidDate(endDateValue))
+        {
+            var difference = (Date.parse(endDateValue) - Date.parse(startDateValue)) / (86400000 * 7);
+            if (difference < 0) {
+                alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
+            } else
+            {
+                MonthValue(startDateValue, endDateValue);
+                ajaxFillOperation(startDateValue, endDateValue, idEquipSelected);
+            }
+        }
+        else
+        {
+            alertify.error("Formato de fecha incorrecto. Verifique yyyy-mm-dd")
+        }
+    });
+});
+
 //Button - Función para filtrar alarmas por fecha
 $(document).ready(function ()
 {
@@ -193,7 +177,7 @@ $(document).ready(function ()
                 alertify.error('La fecha de inicio debe ser anterior a la fecha de finalización.');
             } else
             {
-                ajaxIncidentOperation(startDateValue, endDateValue);
+                ajaxIncidentOperation(startDateValue, endDateValue, idEquipSelected);
             }
         }
         else
@@ -570,103 +554,21 @@ function ajaxFillOperation(startDay, endDay, idEquipo)
     });
 }
 
-function fillsDay(day, idEquipo)
-{                
-    jQuery.ajax({
-        type: "GET",
-        url: 'api_fills.php',
-        dataType: 'json',
-        data: {api_fills: 'get_fill_interval', startDate: day, endDate: day, idEquipo: idEquipo},
-        success: function (obj)
-        {
-            if (!obj.error && jQuery.isEmptyObject(obj.fillsInterval))
-            {
-                alertify.error('Sin registros. Seleccione otra fecha');
-
-            } else
-            {
-                var datesFills = [];
-                var temperatureFills = [];
-                var presionFills = [];
-                var percentageFills = [];
-          
-                var i;
-                for (i in obj.fillsInterval)
-                {
-                    datesFills.push(obj.fillsInterval[i].fecha);
-                    percentageFills.push(obj.fillsInterval[i].porcentaje);
-                    presionFills.push(obj.fillsInterval[i].presion);
-                    temperatureFills.push(obj.fillsInterval[i].temperatura);
-                }
-                
-                chartFusion(datesFills, temperatureFills, 'fusionchart-temperature', '#09a6ee');
-                chartFusion(datesFills, presionFills, 'fusionchart-pressure', '#d346b1');
-                chartFusion(datesFills, percentageFills, 'fusionchart-percentage', '#1be3c1');
-            }
-        }
-    });
-}
-function chartFusion(labels, datafills, idHTML, linecolor)
-{
-    var chart_labels = {category: []};
-    var chart_data = {data: [] };
-
-    for (var i = 0; i < datafills.length; i++)
-    {
-        chart_labels['category'].push({"label": labels[i].toString()});
-        chart_data['data'].push({"value": datafills[i].toString()});
-    }
-
-    var categories = [chart_labels];
-    var dataset = [chart_data];
-
-    var chartObj = new FusionCharts({
-        type: 'scrollline2d',
-        dataFormat: 'json',
-        renderAt: idHTML,
-        width: '100%',
-        height: '70%',
-        dataSource: {
-            chart: {
-                theme: "fusion",
-                bgColor: "#272A3D",
-                scrollColor : "#6b6b6c",
-                divLineColor: "#7d7d7d",
-                baseFontColor: "#7d7d7d",
-                //bgAlpha: "0,0",
-                showLabels: "0",
-                //caption: "Temperarura",
-                //subCaption: "2021-05-09",
-                //xAxisName: "Month",
-                //yAxisName: "Revenue",
-                //numberPrefix: "$",
-                lineThickness: "3",
-                lineColor: linecolor,
-                flatScrollBars: "1",
-                scrollheight: "10",
-                numVisiblePlot: "12",
-                showHoverEffect: "1"
-            },
-            categories: categories,
-            dataset: dataset
-        }
-    });
-    chartObj.render();
-}
-
 function dateSplit(date)
 {
     var dateSplit = date.split(" ");
     return dateSplit[0];
 }
 
-function ajaxIncidentOperation(startDay, endDay) {
+var myChart;
+
+function ajaxIncidentOperation(startDay, endDay, idEquipo) {
     /* Llamada para obtener datos de alarmas por grupos (para grafica de dona) */
     jQuery.ajax({
         type: "GET",
         url: 'api_alarms.php',
         dataType: 'json',
-        data: {api_alarms: 'get_alarm_groups', startDate: startDay, endDate: endDay},
+        data: {api_alarms: 'get_alarm_groups', startDate: startDay, endDate: endDay, idEquipo: idEquipo},
         success: function (obj)
         {
             //var myChart;
@@ -757,7 +659,7 @@ function ajaxIncidentOperation(startDay, endDay) {
         type: "GET",
         url: 'api_alarms.php',
         dataType: 'json',
-        data: {api_alarms: 'get_alarm_list', startDate: startDay, endDate: endDay},
+        data: {api_alarms: 'get_alarm_list', startDate: startDay, endDate: endDay, idEquipo: idEquipo},
         success: function (obj)
         {
             var table = document.getElementById("tbody");
