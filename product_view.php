@@ -73,41 +73,176 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- Fin guajes -->
 
 
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Seleccione intervalo de fechas</h5>
-                </div>
-                <div class="card-body">
-                    <form class="form-horizontal" name="formDates" role="form" enctype="multipar/form-data">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Fecha Inicial</label>
-                                    <input type="text" id="startDateValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
+            <!-- Formulario para dashboards por dia -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="places-buttons">
+                                <div class="row">
+                                    <div class="col-md-6 ml-auto mr-auto text-center">
+                                        <h4 class="card-title">
+                                            Seleccione una fecha
+                                        </h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Final Final</label>
-                                    <input type="text" id="endDateValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
-                                </div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto text-center"> 
+                                        <div class="card-body">
+                                            <form class="form-horizontal" name="formDay" role="form" enctype="multipar/form-data">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Fecha</label>
+                                                            <input type="text" id="dayValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
+                                                        </div>
+                                                    </div>
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <br>
-                                    <button type="button" id="search_fills_button" class="btn btn-fill btn-success">Buscar</button>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group"><br>
+                                                            <button type="button" id="day_fills_button" class="btn btn-fill btn-success">Buscar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
+            
+            <!-- TEMPERATURA - Fusion dash -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-chart">
+                        <div class="card-body">
+                            <div class="card-header ">
+                                <div class="row">
+                                    <div class="col-sm-6 text-left">
+                                        <h4 class="card-title">Temperatura</h4>
+                                        <h5 class="card-category">1 de sepriembre 2021</h5>
+                                    </div>
+                                    <div class="dropdown">
+                                        <div class="card-category">Min.</div>
+                                        <div class="card-category">Max.</div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div id="fusionchart-temperature">    No se encontraron registros de temperatura, seleccione otra fecha</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PRESION - Fusion dash -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-chart">
+                        <div class="card-body">
+                            <div class="card-header ">
+                                <div class="row">
+                                    <div class="col-sm-6 text-left">
+                                        <h4 class="card-title">Presión</h4>
+                                        <h5 class="card-category">1 de sepriembre 2021</h5>
+                                    </div>
+                                    <div class="dropdown">
+                                        <div class="card-category">Min.</div>
+                                        <div class="card-category">Max.</div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div id="fusionchart-pressure">    No se encontraron registros de presión, seleccione otra fecha</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PORCENTAJE - Fusion dash -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-chart">
+                        <div class="card-body">
+                            <div class="card-header ">
+                                <div class="row">
+                                    <div class="col-sm-6 text-left">
+                                        <h4 class="card-title">Porcentaje</h4>
+                                        <h5 class="card-category">1 de sepriembre 2021</h5>
+                                    </div>
+                                    <div class="dropdown">
+                                        <div class="card-category">Min.</div>
+                                        <div class="card-category">Max.</div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div id="fusionchart-percentage">    No se encontraron registros de porcentajes, seleccione otra fecha</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Formulario para promedio -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="places-buttons">
+                                <div class="row">
+                                    <div class="col-md-6 ml-auto mr-auto text-center">
+                                        <h4 class="card-title">
+                                            Seleccione intervalo de fechas para mostrar promedio
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto text-center"> 
+                                        <div class="card-body">
+                                            <form class="form-horizontal" name="formDates" role="form" enctype="multipar/form-data">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Fecha Inicial</label>
+                                                            <input type="text" id="startDateValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="">Final Final</label>
+                                                            <input type="text" id="endDateValue" placeholder="yyyy-mm-dd" class="form-control" onkeypress="validateKeypress();" required="required">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group"><br>
+                                                            <button type="button" id="search_fills_button" class="btn btn-fill btn-success">Buscar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Tempratura dash -->
             <div class="row">

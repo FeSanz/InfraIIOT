@@ -15,4 +15,12 @@ $(function () {
         maxDate: "0"
     });
     
+     $("#dayValue").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        minDate: "2021-08-01",
+        maxDate: "0"
+    });
+    
 });
