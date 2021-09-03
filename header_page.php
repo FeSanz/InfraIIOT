@@ -28,9 +28,28 @@
         <script src="assets/alertify/sweetalert2.all.js" type="text/javascript"></script>
          <!-- JQuery CSS-->
         <link href="assets/local/css/jquery_ui.css" rel="stylesheet" type="text/css"/>
-        <!-- Fusion Charts CSS-->
+        <!-- DataTable-->
+        <link href="assets/dataTable/dataTables_1_11.css" rel="stylesheet" type="text/css"/>
+        <style>
+                    table.dataTable tbody tr.selected {
+                        color: white !important;
+                        background-color: #d346b1 !important;  /* Not working */
+                    }
+                </style>
+        <script src="assets/dataTable/jquery-3.5.1.js" type="text/javascript"></script>
+        <script src="assets/dataTable/dataTables.min.js" type="text/javascript"></script>
+        <script src="assets/dataTable/dataTables.js" type="text/javascript"></script>
+        <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
+        <!--<script src="assets/local/js/jquery_3.6.0.js" type="text/javascript"></script>-->
+        <!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.js"></script>-->
+        
+        <!-- Fusion Charts JS-->
         <script src="assets/fusion/js/fusioncharts.js" type="text/javascript"></script>
         <script src="assets/fusion/js/themes/fusioncharts.theme.fusion.js" type="text/javascript"></script>
+        
+
     </head>
 
     <body class="">

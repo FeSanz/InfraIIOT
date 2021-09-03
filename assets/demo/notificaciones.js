@@ -21,7 +21,7 @@ function GetAllNotifications(){
         dataType: 'json',
         data: { api_notificaciones: 'get_alarm_notification'},
         success: function (data) {
-            console.log("Hemos cargado todas las notificaciones");
+            //console.log("Hemos cargado todas las notificaciones");
             var lista = document.getElementById("alertList");
             //lista.className = "list-group";
             document.getElementById("numAlerts").innerText = data.notification.length;

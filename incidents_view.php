@@ -39,11 +39,10 @@
                 <div class="col-12">
                     <div class="card card-chart">
                         <div class="card-header">
-                                <h4 class="card-title">Seleccione intervalo de fechas</h4>
-                                <div class="dropdown">
-                                    <div class="card-category text-right" id="equipName">Equipo 1</div>
-                                    <div class="card-category" id="message"></div>
-                                </div>
+                            <h4 class="card-title">Seleccione intervalo de fechas</h4>
+                            <div class="dropdown">
+                                <div class="card-category text-right" id=""></div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <form class="form-horizontal" name="formDates" role="form" enctype="multipar/form-data">
@@ -76,58 +75,69 @@
             <!-- Fin de barra de selección de fechas -->
 
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="card card-chart">
-                        <div class="card-header">
-                            <h4 class="card-title ">Registro de incidencias</h4>
-                            <h3 id="dateSelectedGroups"class="card-title"><i class="tim-icons icon-sound-wave text-success"></i></h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="chartDoughnut"></canvas>
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="card card-tasks">
+                        <div class="card-header ">
+                            <div class="row">
+                                <div class="col-sm-11 text-left">
+                                    <h6 class="title d-inline">Registro de incidencias</h6>
+                                    <p class="card-category d-inline" id="">
+                                    </p>
+                                    <h5 class="card-category" id="dateSelectedGroups"></h5>
+                                </div>
+                                <div class="dropdown">
+                                    <div class="card-category" id="totalIncidents"></div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="card-body ">
+                            <div id="chartdonut-indicidents"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="card ">
-                        <div class="card-header">
-                            <h4 class="card-title"> Historial de incidencias</h4>
+                          <div class="card-header ">
+                            <div class="row">
+                                <div class="col-sm-11 text-left">
+                                    <h6 class="title d-inline">Historial de incidencias</h6>
+                                    <p class="card-category d-inline" id="">
+                                    </p>
+                                    <h5 class="card-category" id="dateSelectedGroups"></h5>
+                                </div>
+                                <div class="dropdown">
+                                    <div class="card-category" id="totalIncidents"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="table" class="table tablesorter " >
-                                    <thead class=" text-primary">
-                                        <tr>
-                                            <th class="text-center">
-                                                Fecha/Hora
-                                            </th>
-                                            <th class="text-center">
-                                                Causa de la incidencia
-                                            </th>
-                                            <th class="text-center">
-                                                Equipo
-                                            </th>
-                                            <!--
-                                            <th class="text-center">
-                                                Accion
-                                            </th>
-                                            -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody">
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="display table table-dark" id="dataTables-incidents" style="width:100%" >
+                                <thead class="">
+                                    <tr>
+                                        <th>
+                                            Fecha/Hora
+                                        </th>
+                                        <th>
+                                            Causa de la incidencia
+                                        </th>
+                                        <th>
+                                            Equipo
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="content-incidents">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>   
-             
+
         </div>
     </div>
 </div>
 <!-- Fin Conetenido Dashboards -->
-                
+
 <?php include 'footer_page.php'; ?>               

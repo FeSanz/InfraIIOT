@@ -95,6 +95,10 @@ function ChangeEquipment(idSelected)
     document.getElementById("equipNamePerc").innerHTML = " &nbsp;&nbsp;&nbsp;►&nbsp;Equipo " + idSelected;
     //para chart con promedio
     document.getElementById("equipNameAver").innerHTML = "Equipo " + idSelected; 
+    
+    //document.getElementById("equipNameInc").innerHTML = "Equipo " + idSelected; 
+    //document.getElementById("idEquipDonut").innerHTML = " &nbsp;►&nbsp Equipo " + idSelected; 
+    //document.getElementById("idEquipTab").innerHTML = "&nbsp;&nbsp; &nbsp;►&nbsp;Equipo " + idSelected; 
 }
 
 /*Obtiene el intervalo de meses consultados*/
@@ -210,18 +214,18 @@ $(document).ready(function ()
     });
 });
 
-gradientDoughnut = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: false, //true,
-            text: 'Chart.js Doughnut Chart'
-        }
-    }
-};
+//gradientDoughnut = {
+//    responsive: true,
+//    plugins: {
+//        legend: {
+//            position: 'top',
+//        },
+//        title: {
+//            display: false, //true,
+//            text: 'Chart.js Doughnut Chart'
+//        }
+//    }
+//};
 
 function ajaxFillOperation(startDay, endDay, idEquipo)
 {                
@@ -439,7 +443,8 @@ function chartFusionBarInterval(labels, temperature_data, pressure_data, percent
                 flatScrollBars: "1",
                 scrollheight: "10",
                 numVisiblePlot: "12",
-                showHoverEffect: "1"
+                showHoverEffect: "1",
+                scrollShowButtons: "0",
             },
             categories: categories,
             dataset: dataset
@@ -454,7 +459,7 @@ function dateSplit(date)
     return dateSplit[0];
 }
 
-var myChart;
+//var myChart;
 function ajaxIncidentOperation(startDay, endDay, idEquipo) {
     /* Llamada para obtener datos de alarmas por grupos (para grafica de dona) */
     jQuery.ajax({
@@ -464,10 +469,6 @@ function ajaxIncidentOperation(startDay, endDay, idEquipo) {
         data: {api_alarms: 'get_alarm_groups', startDate: startDay, endDate: endDay, idEquipo: idEquipo},
         success: function (obj)
         {
-            //var myChart;
-            var meses = document.getElementById("dateSelectedGroups");
-            var ctxDoughnut = document.getElementById("chartDoughnut").getContext("2d");
-
             if (!obj.error && !jQuery.isEmptyObject(obj.alarmGroups))
             {
                 var nombres = [];
@@ -481,51 +482,53 @@ function ajaxIncidentOperation(startDay, endDay, idEquipo) {
                     totales.push(obj.alarmGroups[i].total);
                     totalAlarmas = totalAlarmas + obj.alarmGroups[i].total;
                 }
-
-                //Obtenemos los nombres de los meses para escribirlos junto con el total
-                meses.innerHTML = months[parseInt(startDay.substring(5,7)-1)] + " - " + 
-                                months[parseInt(endDay.substring(5,7))-1] + "  Total: " + 
-                                totalAlarmas;
+                
+                var options = {timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById("dateSelectedGroups").innerHTML = new Date(startDay).toLocaleDateString("es-ES", options) + " a " +
+                                                                new Date(endDay).toLocaleDateString("es-ES", options);
+                document.getElementById("totalIncidents").innerHTML = "  Total: " + totalAlarmas;;
+                        
+                chartFusionDonutIncidents(nombres, totales, 'chartdonut-indicidents');
                 
                 /************************Doughnut Chart****************/                
-                var data = {
-                    labels: nombres /*['INC.', 'INC.2', 'INC.3', 'INC.4', 'INC.5']*/,
-                    datasets: [{
-                            label: "Incidencias",
-                            backgroundColor: [
-                                '#4dc9f6',
-                                '#f67019',
-                                '#f53794',
-                                '#537bc4',
-                                '#acc236',
-                                '#166a8f',
-                                '#00a950',
-                                '#58595b',
-                                '#8549ba',
-                                '#c0392b',
-                                '#9b59b6',
-                                '#2980b9',
-                                '#1abc9c',
-                                '#d35400',
-                                '#2e4053',
-                                '#6d1f35' 
-                              ],
-                            data: totales /*[10, 20, 30, 15, 25]*/
-                        }]
-                };
-
-                //Para evitar el bug que mostraba la gráfica anterior bajo la nueva
-                if (myChart != null)
-                {
-                    myChart.destroy();
-                }
-                
-                myChart = new Chart(ctxDoughnut, {
-                    type: 'pie',
-                    data: data,
-                    options: gradientDoughnut,
-                    responsive: true,
-                });
+//                var data = {
+//                    labels: nombres /*['INC.', 'INC.2', 'INC.3', 'INC.4', 'INC.5']*/,
+//                    datasets: [{
+//                            label: "Incidencias",
+//                            backgroundColor: [
+//                                '#4dc9f6',
+//                                '#f67019',
+//                                '#f53794',
+//                                '#537bc4',
+//                                '#acc236',
+//                                '#166a8f',
+//                                '#00a950',
+//                                '#58595b',
+//                                '#8549ba',
+//                                '#c0392b',
+//                                '#9b59b6',
+//                                '#2980b9',
+//                                '#1abc9c',
+//                                '#d35400',
+//                                '#2e4053',
+//                                '#6d1f35' 
+//                              ],
+//                            data: totales /*[10, 20, 30, 15, 25]*/
+//                        }]
+//                };
+//
+//                //Para evitar el bug que mostraba la gráfica anterior bajo la nueva
+//                if (myChart != null)
+//                {
+//                    myChart.destroy();
+//                }
+//                
+//                myChart = new Chart(ctxDoughnut, {
+//                    type: 'pie',
+//                    data: data,
+//                    options: gradientDoughnut,
+//                    responsive: true,
+//                });
 
                 /****************Final Doughnut Chart****************************/
             } 
@@ -538,10 +541,10 @@ function ajaxIncidentOperation(startDay, endDay, idEquipo) {
                     //alertify.error('Sin registros. Seleccione otra fecha');
 
                     // Se borra la gráfica
-                    myChart.destroy();
+                    //myChart.destroy();
 
                     //Se limpia el mensaje de los meses
-                    document.getElementById("dateSelectedGroups").innerHTML = "";
+                    document.getElementById("totalIncidents").innerHTML = "";
                 }
             }
         }
@@ -555,10 +558,11 @@ function ajaxIncidentOperation(startDay, endDay, idEquipo) {
         data: {api_alarms: 'get_alarm_list', startDate: startDay, endDate: endDay, idEquipo: idEquipo},
         success: function (obj)
         {
-            var table = document.getElementById("tbody");
+            var table = document.getElementById("content-incidents");
 
             if (!obj.error && !jQuery.isEmptyObject(obj.alarmList))
             {
+                $('#dataTables-incidents').DataTable().clear().destroy();
                 //Primero se tiene que limpiar la tabla para no añadirle las lineas
                 table.innerHTML = "";
 
@@ -574,6 +578,7 @@ function ajaxIncidentOperation(startDay, endDay, idEquipo) {
                             '</tr>';
                     table.insertRow(-1).innerHTML = str;
                 }
+                $('#dataTables-incidents').DataTable();
             } else
             {
                 //Si no obtuvimos resultados limpiamos la tabla
@@ -585,4 +590,39 @@ function ajaxIncidentOperation(startDay, endDay, idEquipo) {
             }
         }
     });
+}
+
+function chartFusionDonutIncidents(labels, dataincidents, idHTML)
+{
+    var dataset = {data: []};
+
+    for (var i = 0; i < dataincidents.length; i++)
+    {
+        dataset['data'].push({label: labels[i].toString(), value: dataincidents[i].toString()});
+    }
+    var chartObj = new FusionCharts({
+        type: 'doughnut2d',
+        dataFormat: 'json',
+        renderAt: idHTML,
+        width: '100%',
+        height: '85%',
+        dataSource: {
+            chart: {
+                theme: "fusion",
+                bgColor: "#272A3D",
+                baseFontColor: "#7d7d7d",
+                showLabels: "0",
+                showpercentvalues: "1",
+                //defaultcenterlabel: "Incidencias",
+                centerLabelColor: "#7d7d7d",
+                aligncaptionwithcanvas: "0",
+                captionpadding: "0",
+                decimals: "1",
+                baseFontColor: "#7d7d7d",
+                labelFontColor:"#7d7d7d"
+            },
+            data: dataset['data'] 
+        }
+    });
+    chartObj.render();
 }

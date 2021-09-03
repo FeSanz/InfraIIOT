@@ -31,20 +31,20 @@
                     <div class="clearfix"></div>
                   </a>
                 </li>
-                <li class="adjustments-line text-center color-change">
+                <!--<li class="adjustments-line text-center color-change">
                   <span class="color-label">LIGHT MODE</span>
                   <span class="badge light-badge mr-2"></span>
                   <span class="badge dark-badge ml-2"></span>
                   <span class="color-label">DARK MODE</span>
-                </li>
+                </li>-->
 
               </ul>
             </div>
         </div>
         <!--Sesión-->
         <script src="assets/js/storage.js"></script>
-        <!--   Core JS Files   -->
-        <script src="assets/local/js/jquery_3.6.0.js" type="text/javascript"></script>
+        <!--   Core JS Files   
+        <script src="assets/local/js/jquery_3.6.0.js" type="text/javascript"></script>-->
         <!-- JQuery JS-->
         <script src="assets/local/js/jquery_ui_1.12.js" type="text/javascript"></script>
         <!-- Datepicker JS-->
